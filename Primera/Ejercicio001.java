@@ -14,4 +14,3 @@ public class Ejercicio001 {
        System.out.println("El resultado es: " + resultado); 
     } 
 }
-

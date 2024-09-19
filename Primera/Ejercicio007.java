@@ -16,8 +16,8 @@ public class Ejercicio007 {
         }
                
         if(x%y == 0)
-            System.out.println("Son múltiplos");
+            System.out.println(x + " es múltiplo de " + y);
         else
-            System.out.println("No son múltiplos");  
+            System.out.println(x + " no es múltiplo de " + y);  
     }
 }
