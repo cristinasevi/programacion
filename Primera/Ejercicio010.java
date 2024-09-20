@@ -8,15 +8,15 @@ public class Ejercicio010 {
         int num = 5;
         int acum = 1;
        
+        // Ascendente
         for(int cont=1; cont<=num; cont++)
             acum = acum*cont; // acum *=cont
         System.out.println("El factorial de " + num + " es: " + acum);
         
-        /*
-        for(int cont=num; cont>1; cont--)
+        // Descendente
+        acum = 1;
+        for(int cont=num; cont>=1; cont--)
             acum = acum*cont; // acum *=cont
-         // descendente
         System.out.println("El factorial de " + num + " es: " + acum);
-        */
     }
 }

@@ -9,6 +9,7 @@ public class Ejercicio004 {
 	x = 10;
 	y = 50;
         z = 33;
+        
         if(x > y)
             if(x > z)
                 System.out.println("El mayor es: " + x);

@@ -8,6 +8,7 @@ public class Ejercicio003 {
         int x, y;
 	y = 144;
 	x = 144;
+        
         if(x == y)
             System.out.println("x e y son igualen y valen: " + x);
         else if(x > y)

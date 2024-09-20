@@ -7,6 +7,7 @@ public class Ejercicio006 {
     public static void main (String arg[]){
         int x;
         x = 25;
+        
         if(x%10 == 5)
             System.out.println("El número " + x + " termina en 5.");
         else

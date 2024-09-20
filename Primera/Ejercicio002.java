@@ -8,7 +8,8 @@ public class Ejercicio002 {
 	int x, y;
 	y = 65;
 	x = 144;
-	if(x > y) {
+	
+        if(x > y) {
             System.out.println("El mayor es: " + x);
             System.out.println("El mayor es: " + x);
         }else{

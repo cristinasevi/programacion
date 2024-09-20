@@ -8,6 +8,7 @@ public class Ejercicio009 {
         int num;
         int cont;
         num = 5;
+        
         for(cont=1; cont<=10; cont++)
             System.out.println(num + " x " + cont + " = " + (num*cont));
     }
