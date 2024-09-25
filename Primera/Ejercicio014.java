@@ -13,6 +13,7 @@ public class Ejercicio014 {
         for(int i=0; i<datos.length; i++) // length: cuenta el número de datos que hay
             System.out.printf("Datos de [%d] = %d\n", i, datos[i]);
         
+        // Multiplicar por 2 los elementos del vector
         for(int i=0; i<datos.length; i++) 
             datos[i] *= 2;
         System.out.println();
