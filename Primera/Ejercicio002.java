@@ -11,7 +11,6 @@ public class Ejercicio002 {
 	
         if(x > y) {
             System.out.println("El mayor es: " + x);
-            System.out.println("El mayor es: " + x);
         }else{
             System.out.println("El mayor es: " + y);
         }
