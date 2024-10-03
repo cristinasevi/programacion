@@ -9,7 +9,7 @@ public class Ejercicio031 {
     int kilos[][] = { {10, 20, 30, 40, 50}, 
                           {50, 60, 70, 80, 80},
                           {90, 100, 110, 120, 30} };
-        String []productos = {"Naranjas", "Manzanas", "Peras"};
+        String productos[] = {"Naranjas", "Manzanas", "Peras"};
         double precios[] = {1.5, 2.1, 0.83}; // double -> decimales
         double acum;
         double total=0;

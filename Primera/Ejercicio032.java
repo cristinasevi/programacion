@@ -9,32 +9,26 @@ public class Ejercicio032 {
     int salas[][] = {   {10, 20, 30, 40, 50, 200, 180}, 
                         {50, 60, 70, 80, 80, 300, 198},
                         {90, 100, 110, 120, 130, 150, 120}  };
-        String []dias = {"Lunes", "Martes", "Miércoles", "Jueves", 
+        String dias[] = {"Lunes", "Martes", "Miércoles", "Jueves", 
                          "Viernes", "Sábado", "Domingo"};
         int vacum[] = {0, 0, 0, 0, 0, 0, 0};     
         
-        for(int i=0; i<dias.length; i++){
-            for (int j=0; j<salas.length; j++)
-                vacum[i] += salas[j][i];
+        for(int i=0; i<salas.length; i++){
+            for(int j=0; j<salas[i].length; j++)
+                vacum[j] += salas[i][j];
         }
         
-        int maxEntradas = vacum[0];
-        int minEntradas = vacum[0];
-        int diaMax = 0;
-        int diaMin = 0;
+        int posMax = 0;
+        int posMin = 0;
 
-        for (int i=1; i<vacum.length; i++) {
-            if (vacum[i] > maxEntradas) {
-                maxEntradas = vacum[i];
-                diaMax = i;
-            }
-            if (vacum[i] < minEntradas) {
-                minEntradas = vacum[i];
-                diaMin = i;
-            }
+        for(int i=0; i<vacum.length; i++) {
+            if(vacum[i] > vacum[posMax])
+                posMax = i;
+            if(vacum[i] < vacum[posMin]) 
+                posMin = i;
         }
         
-        System.out.printf("El %s es el día con más entradas vendidas: %d\n", dias[diaMax], maxEntradas);
-        System.out.printf("El %s es el día con menos entradas vendidas: %d\n", dias[diaMin], minEntradas);
+        System.out.printf("El %s fue el mejor día con %d espectadores\n", dias[posMax], vacum[posMax]);
+        System.out.printf("El %s fue el peor día con %d espectadores\n", dias[posMin], vacum[posMin]);
     }
 }

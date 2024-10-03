@@ -8,7 +8,7 @@ public class Ejercicio030 {
         int kilos[][] = { {10, 20, 30, 40, 50}, 
                           {50, 60, 70, 80, 80},
                           {90, 100, 110, 120, 30} };
-        String []productos = {"Naranjas", "Manzanas", "Peras"}; // String -> siempre entre comillas
+        String productos[] = {"Naranjas", "Manzanas", "Peras"}; // String -> siempre entre comillas
         int acum;
         
         for(int i=0; i<productos.length; i++){
