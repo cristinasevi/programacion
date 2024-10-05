@@ -31,7 +31,7 @@ public class Ejercicio034 {
             }
         }
         
-         System.out.printf("La película %s el %s consiguió la máxima audiencia con %d espectadores\n", peliculas[posMaxFila], dias[posMaxCol], salas[posMaxFila][posMaxCol]);
+        System.out.printf("La película %s el %s consiguió la máxima audiencia con %d espectadores\n", peliculas[posMaxFila], dias[posMaxCol], salas[posMaxFila][posMaxCol]);
         System.out.printf("La película %s el %s consiguió la mínima audiencia con %d espectadores\n", peliculas[posMinFila], dias[posMinCol], salas[posMinFila][posMinCol]);
     }
 }
