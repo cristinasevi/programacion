@@ -6,9 +6,9 @@ package Primera;
 public class Ejercicio036 {
     public static void main(String arg[]) {
         int notas[][] = { {7, 9, 3, 8}, 
-                          {10, 9, 9, 8}, // Palazon saco 10 en programacion
-                          {9, 10, 7, 1}, // javi saco 10 en lenguaje marcas
-                          {3, 10, 5, 6}, // vicente saco 10 en lenguaje
+                          {10, 9, 9, 8},
+                          {9, 10, 7, 1},
+                          {3, 10, 5, 6},
                           {8, 5, 4, 5}  };
         String alumnos[] = {"Viviana", "Palazón", "Javi", "Vicente", "Álvaro"};
         String asignaturas[] = {"Programación", "Leng.Marcas", "Bases.Datos", "Entornos.Desarrollo"};
