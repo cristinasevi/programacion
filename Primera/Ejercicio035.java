@@ -21,46 +21,35 @@ public class Ejercicio035 {
         
         for(int i=0; i<alumnos.length; i++){
             for(int j=0; j<asignaturas.length; j++){
-                vAlumnosNota[i] += (double) notas[i][j] / asignaturas.length;
-                vAsigNota[j] += (double) notas[i][j] / alumnos.length;
+                vAlumnosNota[i] += notas[i][j];
+                vAsigNota[j] += notas[i][j];
             }
         }
        
-        double mejorNotAlum = vAlumnosNota[0];
-        double peorNotAlum = vAlumnosNota[0];
-        String mejorAlum = alumnos[0];
-        String peorAlum = alumnos[0];
+        int posMejorAlumno = 0;
+        int posPeorAlumno = 0;
        
-        for (int i = 1; i < alumnos.length; i++) {
-            if (vAlumnosNota[i] > mejorNotAlum) {
-                mejorNotAlum = vAlumnosNota[i];
-                mejorAlum = alumnos[i];
-            }
-            if (vAlumnosNota[i] < peorNotAlum) {
-                peorNotAlum = vAlumnosNota[i];
-                peorAlum = alumnos[i];
-            }
+        for (int i=1; i<vAlumnosNota.length; i++) {
+            if (vAlumnosNota[i] > vAlumnosNota[posMejorAlumno])
+                posMejorAlumno = i;
+            if (vAlumnosNota[i] < vAlumnosNota[posPeorAlumno])
+                posPeorAlumno = i;
         }
         
-        double mejorNotAsig = vAsigNota[0];
-        double peorNotAsig = vAsigNota[0];
-        String mejorAsig = asignaturas[0];
-        String peorAsig = asignaturas[0];
+        System.out.printf("Las mejores notas son de %s, con una media de %.2f\n", alumnos[posMejorAlumno], vAlumnosNota[posMejorAlumno] / asignaturas.length);
+        System.out.printf("Las peores notas son de %s, con una media de %.2f\n", alumnos[posPeorAlumno], vAlumnosNota[posPeorAlumno] / asignaturas.length);
         
-        for (int j = 1; j < asignaturas.length; j++) {
-            if (vAsigNota[j] > mejorNotAsig) {
-                mejorNotAsig = vAsigNota[j];
-                mejorAsig = asignaturas[j];
-            }
-            if (vAsigNota[j] < peorNotAsig) {
-                peorNotAsig = vAsigNota[j];
-                peorAsig = asignaturas[j];
-            }
+        int posMejorAsig = 0;
+        int posPeorAsig = 0;
+        
+        for (int i=0; i<vAsigNota.length; i++) {
+            if (vAsigNota[i] > vAsigNota[posMejorAsig])
+                posMejorAsig = i;
+            if (vAsigNota[i] < vAsigNota[posPeorAsig])
+                posPeorAsig = i;
         }
         
-        System.out.printf("El alumno con mejor media es %s con una media de %.2f\n", mejorAlum, mejorNotAlum);
-        System.out.printf("El alumno con peor media es %s con una media de %.2f\n", peorAlum, peorNotAlum);
-        System.out.printf("La asignatura con mejor media es %s con una media de %.2f\n", mejorAsig, mejorNotAsig);
-        System.out.printf("La asignatura con peor media es %s con una media de %.2f\n", peorAsig, peorNotAsig);
+        System.out.printf("Las mejores notas son de %s, con una media de %.2f\n", asignaturas[posMejorAsig], vAsigNota[posMejorAsig] / alumnos.length);
+        System.out.printf("Las peores notas son de %s, con una media de %.2f\n", asignaturas[posPeorAsig], vAsigNota[posPeorAsig] / alumnos.length);
     }
 }

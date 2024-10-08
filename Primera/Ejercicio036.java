@@ -13,10 +13,10 @@ public class Ejercicio036 {
         String alumnos[] = {"Viviana", "Palazón", "Javi", "Vicente", "Álvaro"};
         String asignaturas[] = {"Programación", "Leng.Marcas", "Bases.Datos", "Entornos.Desarrollo"};
         
-        
+        System.out.println("Listado de DIECES: ");
         for(int i=0; i<alumnos.length; i++)
             for(int j=0; j<asignaturas.length; j++)
                 if(notas[i][j] == 10) 
-                    System.out.printf("%s sacó un 10 en %s\n", alumnos[i], asignaturas[j]);
+                    System.out.printf("%s en %s\n", alumnos[i], asignaturas[j]);
     }
 }
