@@ -1,6 +1,6 @@
 /*
- Mostrar por pantalla el contenido de tabla1 en tabla2 pero los elementos que hay en 
- columnas tienen que pasar a filas y los que hay en filas a columnas
+ Cambiar el lugar de los elementos de la tabla, intercambiando las filas
+ por las columnas, utilizando una tabla auxiliar.
  */
 package Primera;
 

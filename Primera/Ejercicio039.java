@@ -1,5 +1,6 @@
 /*
- Hacer lo mismo que en el ejercicio anterior, pero sin la tabla2
+ Cambiar el lugar de los elementos de la tabla, intercambiando las filas
+ por las columnas, sin utilizar una tabla auxiliar.
  */
 package Primera;
 
@@ -17,10 +18,10 @@ public class Ejercicio039 {
                 tabla1[i][j] = tabla1[j][i];
                 tabla1[j][i] = intercambio;
             }  
+        
         for(int i=0; i<tabla1.length; i++) {
-            for(int j=0; j<tabla1[i].length; j++) {
-                System.out.print(tabla1[i][j] + " ");
-            }
+            for(int j=0; j<tabla1[i].length; j++)
+                System.out.print(tabla1[i][j] + "  ");
             System.out.println();
         }
     }
