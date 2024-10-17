@@ -6,17 +6,19 @@ package Primera;
 public class Ejercicio046 {
     public static void main (String arg[]){
         int vector[] = {24, 45, 65, 12, 7, 123, 16, 50};
-        maximo(vector);
-        int max = maximo(vector);
-        System.out.printf("El valor máximo del vector es: %d ", max);
+        int vector2[] = {4, 49, 165, 12, 17, 123, 16, 50};
+        int numMax = maximo(vector);
+        
+        System.out.println("El máximo del primer vector es: " + numMax);
+        System.out.println("El máximo del segundo vector es: " + maximo(vector2));
     }
     
     public static int maximo(int v1[]){
-        int max = v1[0];
+        int posMax = 0;
         
-        for(int i=0; i<v1.length; i++)
-            if(v1[i]>max)
-                max = v1[i];
-        return max;
+        for(int i=1; i<v1.length; i++)
+            if(v1[i] > v1[posMax])
+                posMax = i;
+        return v1[posMax];
     }
 }
