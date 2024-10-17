@@ -1,7 +1,7 @@
 /*
  1. Implementar un método que reciba el array de salarios y nos devuelva un 
     vector unidimensional de 6 enteros con los salarios acumulados por mes.
- 2. uan funcion q haga lo mismo, a la que le pases el salariosemestral y vpormes 
+ 2. Implementar otro método que reciba el array de salarios y el vPorMes
  */
 package Primera;
 
@@ -18,7 +18,7 @@ public class Ejercicio048 {
         for(int i=0; i<meses.length; i++)
             System.out.printf("En %s se ha pagado: %d\n", meses[i], porMes[i]);
         
-        System.out.println("----------------------------");
+        System.out.println("-----------------------------");
         
         int vPorMes[] = {0, 0, 0, 0, 0, 0}; // new int[6]
         salariosSemestrales2(salarios, vPorMes);
