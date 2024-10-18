@@ -1,7 +1,8 @@
 /*
  1. Implementar un método que reciba el array de salarios y nos devuelva un 
-    vector unidimensional de 6 enteros con los salarios acumulados por mes.
+    vector unidimensional de 6 enteros con los salarios acumulados por mes
  2. Implementar otro método que reciba el array de salarios y el vPorMes
+ 3. Implementar otro método que saque la cantidad total que cobra cada empleado
  */
 package Primera;
 
@@ -15,15 +16,22 @@ public class Ejercicio048 {
         String meses[] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"};
         
         int porMes[] = salariosSemestrales(salarios);
-        for(int i=0; i<meses.length; i++)
+        for(int i=0; i<porMes.length; i++)
             System.out.printf("En %s se ha pagado: %d\n", meses[i], porMes[i]);
         
         System.out.println("-----------------------------");
         
         int vPorMes[] = {0, 0, 0, 0, 0, 0}; // new int[6]
-        salariosSemestrales2(salarios, vPorMes);
-        for(int i=0; i<meses.length; i++)
+        salariosSemestrales(salarios, vPorMes);
+        for(int i=0; i<porMes.length; i++)
             System.out.printf("En %s se ha pagado: %d\n", meses[i], vPorMes[i]);
+        
+        System.out.println("-----------------------------");
+        
+        int vPorEmpleado[] = {0, 0, 0, 0}; // new int[4]
+        salariosEmpleado(salarios, vPorEmpleado);
+         for(int i=0; i<vPorEmpleado.length; i++)
+                System.out.printf("El salario de %s es %d\n", empleados[i], vPorEmpleado[i]);
     }  
     
     public static int[] salariosSemestrales (int sals[][]){ 
@@ -34,11 +42,20 @@ public class Ejercicio048 {
         return vAcum;
     }
     
-    public static void salariosSemestrales2 (int sals[][], int vPM[]){
+    public static void salariosSemestrales (int sals[][], int vPM[]){
         for(int j=0; j<vPM.length; j++)
             for(int i=0; i<sals.length; i++)
                 vPM[j] += sals[i][j];
     }
+    
+    public static void salariosEmpleado (int sals[][], int vPorEmpleado[]){
+        for(int i=0; i<sals.length; i++)
+            for(int j=0; j<sals[i].length; j++)
+                vPorEmpleado[i] += sals[i][j];
+    }
 }
 
-// Al crear una función y declarar: int[] --> hace que devuelva un vector de enteros
+/*
+Al crear una función y declarar: int[] --> hace que devuelva un vector de enteros
+Se puede llamar a los métodos de la misma forma,  porque pasas parámetros diferentes
+*/
