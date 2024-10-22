@@ -28,10 +28,17 @@ public class Ejercicio048 {
         
         System.out.println("-----------------------------");
         
+        int porEmpleado[] = salariosEmpleado(salarios);
+         for(int i=0; i<porEmpleado.length; i++)
+                System.out.printf("El salario de %s es %d\n", empleados[i], porEmpleado[i]);
+         
+        System.out.println("-----------------------------");
+        
         int vPorEmpleado[] = {0, 0, 0, 0}; // new int[4]
         salariosEmpleado(salarios, vPorEmpleado);
          for(int i=0; i<vPorEmpleado.length; i++)
                 System.out.printf("El salario de %s es %d\n", empleados[i], vPorEmpleado[i]);
+        
     }  
     
     public static int[] salariosSemestrales (int sals[][]){ 
@@ -46,6 +53,14 @@ public class Ejercicio048 {
         for(int j=0; j<vPM.length; j++)
             for(int i=0; i<sals.length; i++)
                 vPM[j] += sals[i][j];
+    }
+    
+    public static int[] salariosEmpleado (int sals[][]){
+        int vPorEmpleado[] = {0, 0, 0, 0}; // new int[4]
+        for(int i=0; i<sals.length; i++)
+            for(int j=0; j<sals[i].length; j++)
+                vPorEmpleado[i] += sals[i][j];
+        return vPorEmpleado;
     }
     
     public static void salariosEmpleado (int sals[][], int vPorEmpleado[]){
