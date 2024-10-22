@@ -29,14 +29,14 @@ public class Ejercicio048 {
         System.out.println("-----------------------------");
         
         int porEmpleado[] = salariosEmpleado(salarios);
-         for(int i=0; i<porEmpleado.length; i++)
+        for(int i=0; i<porEmpleado.length; i++)
                 System.out.printf("El salario de %s es %d\n", empleados[i], porEmpleado[i]);
          
         System.out.println("-----------------------------");
         
         int vPorEmpleado[] = {0, 0, 0, 0}; // new int[4]
         salariosEmpleado(salarios, vPorEmpleado);
-         for(int i=0; i<vPorEmpleado.length; i++)
+        for(int i=0; i<vPorEmpleado.length; i++)
                 System.out.printf("El salario de %s es %d\n", empleados[i], vPorEmpleado[i]);
         
     }  
