@@ -38,7 +38,6 @@ public class Ejercicio048 {
         salariosEmpleado(salarios, vPorEmpleado);
         for(int i=0; i<vPorEmpleado.length; i++)
                 System.out.printf("El salario de %s es %d\n", empleados[i], vPorEmpleado[i]);
-        
     }  
     
     public static int[] salariosSemestrales (int sals[][]){ 
