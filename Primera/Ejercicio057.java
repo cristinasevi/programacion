@@ -13,9 +13,12 @@ public class Ejercicio057 {
         int multiplicador = 5;
         
         modificar(kilos, multiplicador);
-        for(int i=0; i<kilos.length; i++)
-            for(int j=0; j<kilos[i].length; j++)
+        for(int i=0; i<kilos.length; i++){
+            for(int j=0; j<kilos[i].length; j++){
                 System.out.print(kilos[i][j] + " ");
+            }
+            System.out.println();
+        }  
     }
     
     public static void modificar (int kilos[][], int multiplicador){
@@ -23,7 +26,5 @@ public class Ejercicio057 {
             for(int j=0; j<kilos[i].length; j++)
                 if(kilos[i][j] < 10)
                     kilos[i][j] *= multiplicador;
-                else
-                    kilos[i][j] = kilos[i][j];
     }
 }
