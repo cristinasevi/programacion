@@ -9,11 +9,6 @@ Para realizar la depuración del código, sigue estos pasos:
 
 ### Instanciar - Reservar memoria
 
-int vector = new int[4] 
-int tabla[][] = new int[4][4] --> new int[columna][fila]
-
-## Instanciar - Reservar memoria
-
 Para reservar memoria en Java, se utilizan las siguientes sintaxis:
 
 - Para instanciar un vector unidimensional:
@@ -30,17 +25,17 @@ Para reservar memoria en Java, se utilizan las siguientes sintaxis:
 
 ### Tipos de datos
 
-**int**: Enteros
+**`int`**: Enteros
 Representación: %d
 
-**String**: Cadenas
+**`String`**: Cadenas
 Representación: %s 
 Se delimitan con comillas dobles (" ")
 
-**double**: Decimales 
+**`double`**: Decimales 
 Representación: %2.f (para formatear con dos decimales)
 
-**char**: Caracteres
+**`char`**: Caracteres
 Representación: %c 
 Se delimitan con comillas simples (' ')
 
@@ -60,7 +55,6 @@ Se delimitan con comillas simples (' ')
 - Cuando se ejecuta la instrucción `return`, la función termina, incluso si hay más instrucciones después de esta.
 - Es posible tener más de un `return` en una función, pero no se aconseja debido a la complejidad que puede generar.
 
-
 ### Conversión de caracteres
 
 - **`Character.toUpperCase(char)`**: Este método convierte un carácter en su equivalente en mayúsculas y devuelve el resultado. Por ejemplo:
@@ -69,15 +63,14 @@ Se delimitan con comillas simples (' ')
   char letra = 'a';
   char letraMayuscula = Character.toUpperCase(letra); // letraMayuscula será 'A'
 
-### EStructuras de control de bucle
+### Estructuras de control de bucle
 
-**for**
-Se utiliza el bucle `for` cuando sabes el número de iteraciones que quieres ejecutar.
+**`for`**:
+Se utiliza cuando sabes el número de iteraciones que quieres ejecutar.
 
-**while**
-Se utiliza el bucle `while` cuando no sabes el número de iteraciones que se necesitarán.
+**`while`**:
+Se utiliza cuando no sabes el número de iteraciones que se necesitarán.
 Dentro del bucle `while` no se puede declarar una variable, solo se puede incluir la condición.
-
 
 ### Refactorizar
 
