@@ -53,6 +53,7 @@ Se delimitan con comillas simples (' ')
 #### -  Tipos de retorno
 
 **`void`**: no devuelve nada.
+
 **`String`, `int`, `int[]`, `char`...**: Devuelven el tipo de dato especificado.
 
 #### -  Uso del return
