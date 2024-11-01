@@ -20,36 +20,40 @@ Para reservar memoria en Java, se utilizan las siguientes sintaxis:
 
 ### Operadores lógicos
 
-- **AND**: representado como &&
-- **OR**: representado como ||
+- **AND**: representado como `&&`
+- **OR**: representado como `||`
 
 ### Tipos de datos
 
 **`int`**: Enteros
+
 Representación: %d
 
 **`String`**: Cadenas
+
 Representación: %s 
 Se delimitan con comillas dobles (" ")
 
 **`double`**: Decimales 
+
 Representación: %2.f (para formatear con dos decimales)
 
 **`char`**: Caracteres
+
 Representación: %c 
 Se delimitan con comillas simples (' ')
 
 ### Métodos
 
-- Los nombres de lo métodos empiezan en minúscula
-- Los métodos que crees tienes que llamarlos en la función principal 'main'
+- Los nombres de lo métodos empiezan en minúscula.
+- Los métodos que crees tienes que llamarlos en la función principal `main`.
 
-#### Tipos de retorno
+#### - Tipos de retorno
 
-**`void`**: no devuelve nada
-**`String`, `int`, `int[]`, `char`, etc.**: Devuelven el tipo de dato especificado
+**`void`**: no devuelve nada.
+**`String`, `int`, `int[]`, `char`, etc.**: Devuelven el tipo de dato especificado.
 
-#### Uso del return
+#### - Uso del return
 
 - Debes incluir `return` al final de la función si no está definida como `void`; debe devolver el tipo de dato que hayas especificado.
 - Cuando se ejecuta la instrucción `return`, la función termina, incluso si hay más instrucciones después de esta.
