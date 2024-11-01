@@ -32,6 +32,7 @@ Representación: %d
 **`String`**: Cadenas
 
 Representación: %s 
+
 Se delimitan con comillas dobles (" ")
 
 **`double`**: Decimales 
@@ -41,6 +42,7 @@ Representación: %2.f (para formatear con dos decimales)
 **`char`**: Caracteres
 
 Representación: %c 
+
 Se delimitan con comillas simples (' ')
 
 ### Métodos
@@ -48,12 +50,12 @@ Se delimitan con comillas simples (' ')
 - Los nombres de lo métodos empiezan en minúscula.
 - Los métodos que crees tienes que llamarlos en la función principal `main`.
 
-#### - Tipos de retorno
+#### -  Tipos de retorno
 
 **`void`**: no devuelve nada.
-**`String`, `int`, `int[]`, `char`, etc.**: Devuelven el tipo de dato especificado.
+**`String`, `int`, `int[]`, `char`...**: Devuelven el tipo de dato especificado.
 
-#### - Uso del return
+#### -  Uso del return
 
 - Debes incluir `return` al final de la función si no está definida como `void`; debe devolver el tipo de dato que hayas especificado.
 - Cuando se ejecuta la instrucción `return`, la función termina, incluso si hay más instrucciones después de esta.
@@ -74,6 +76,7 @@ Se utiliza cuando sabes el número de iteraciones que quieres ejecutar.
 
 **`while`**:
 Se utiliza cuando no sabes el número de iteraciones que se necesitarán.
+
 Dentro del bucle `while` no se puede declarar una variable, solo se puede incluir la condición.
 
 ### Refactorizar
