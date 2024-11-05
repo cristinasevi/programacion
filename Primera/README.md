@@ -92,4 +92,16 @@ La refactorización consiste en seleccionar un fragmento de código y encapsular
 
 Este proceso ayuda a mejorar la legibilidad y la organización del código, facilitando su mantenimiento y reutilización.
 
+### Operadores de Incremento en Programación
+
+#### Preincrementativo
+**Sintaxis:** `++j`
+
+El valor de la variable `j` se incrementa primero y luego se utiliza en la expresión o en el contexto en el que se llame.
+
+#### Posincrementativo
+**Sintaxis:** `j++`
+
+El valor de la variable `j` primero se utiliza en la expresión o en el contexto en el que se llame y luego se incrementa.
+
 ---
