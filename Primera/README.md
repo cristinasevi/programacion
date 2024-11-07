@@ -110,4 +110,30 @@ El valor de la variable `j` se incrementa primero y luego se utiliza en la expre
 
 El valor de la variable `j` primero se utiliza en la expresión o en el contexto en el que se llame y luego se incrementa.
 
+### Estructura de Control `switch`
+
+La estructura `switch` permite ejecutar diferentes bloques de código según el valor de una expresión específica. Es útil cuando tienes múltiples condiciones que verificar. Elementos que componen un bloque `switch`:
+
+- **`switch`**: Inicia la estructura y evalúa la expresión.
+  
+- **`case`**: Define una opción o caso. Si el valor de la expresión coincide con el valor del `case`, se ejecutará el bloque de código correspondiente a ese caso.
+  
+- **`break`**: Termina el bloque del `case` actual. Sin `break`, el código continuará ejecutando los siguientes `case` hasta encontrar un `break` o llegar al final del `switch`.
+  
+- **`default`**: Define el caso predeterminado, que se ejecuta si ningún otro `case` coincide con la expresión. Es opcional.
+
+```java
+switch (variable) {
+  case valor1:
+    // Código a ejecutar si variable == valor1
+    break;
+  case valor2:
+    // Código a ejecutar si variable == valor2
+    break;
+  default:
+    // Código a ejecutar si ningún caso coincide
+}
+```
+
+
 ---
