@@ -70,6 +70,12 @@ Se delimitan con comillas simples (' ')
   char letra = 'a';
   char letraMayuscula = Character.toUpperCase(letra); // letraMayuscula será 'A'
 
+- **`Character.toLowerCase(char)`**: Este método convierte un carácter en su equivalente en minúsculas y devuelve el resultado. Por ejemplo:
+
+  ```java
+  char letra = 'A';
+  char letraMinuscula = Character.toLowerCase(letra); // letraMinuscula será 'a'
+
 ### Estructuras de control de bucle
 
 **`for`**:
