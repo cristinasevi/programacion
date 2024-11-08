@@ -23,6 +23,5 @@ public class Ejercicio077 {
 /*
  length() --> es una función de la clase String, que cuenta la longitud
  %c --> char
-
  charAt() --> es una función de la clase String, que devuelve el caracter que tu le pongas en la dirección del índice
 */
