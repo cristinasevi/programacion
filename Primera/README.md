@@ -134,6 +134,28 @@ switch (variable) {
     // Código a ejecutar si ningún caso coincide
 }
 ```
+### Funciones de la clase `String`
 
+- **`length()`**: Devuelve la longitud de la cadena (número de caracteres).
+
+ ```java
+  String texto = "Hola";
+  int longitud = texto.length(); // longitud será 4
+```
+
+- **`charAt(int index)`**: Devuelve el carácter que se encuentra en la posición especificada por el índice.
+
+```java
+  String texto = "Hola";
+  char letra = texto.charAt(1); // letra será 'o'
+```
+
+- **`compareTo(String otraCadena)`**: Compara dos cadenas lexicográficamente. Devuelve un número negativo, cero o positivo dependiendo de si la cadena original es menor, igual o mayor que la cadena pasada como parámetro.
+
+ ```java
+  String texto1 = "Hola";
+  String texto2 = "Mundo";
+  int resultado = texto1.compareTo(texto2); // resultado depende de la comparación
+```
 
 ---
