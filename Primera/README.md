@@ -158,4 +158,29 @@ switch (variable) {
   int resultado = texto1.compareTo(texto2); // resultado depende de la comparación
 ```
 
+- **`substring(int start, int end)`**: Devuelve una nueva cadena que contiene los caracteres de la cadena original desde la posición `start` hasta (pero sin incluir) la posición `end`.  
+```java
+  String texto = "Hola Mundo";
+  String subcadena = texto.substring(0, 4); // subcadena será "Hola"
+```
+
+- **`replace(char oldChar, char newChar)`**: Reemplaza todas las apariciones de un carácter específico (`oldChar`) en la cadena por otro carácter (`newChar`). Devuelve una nueva cadena con los caracteres reemplazados.  
+```java
+  String texto = "Hola Mundo";
+  String nuevoTexto = texto.replace('o', 'a'); // nuevoTexto será "Hala Munda"
+```
+
+- **`replace(String oldString, String newString)`**: Reemplaza todas las apariciones de una secuencia específica de caracteres (`oldString`) en la cadena original por otra secuencia (`newString`). Devuelve una nueva cadena con las secuencias reemplazadas.  
+```java
+  String texto = "Hola Mundo";
+  String nuevoTexto = texto.replace("Mundo", "Java"); // nuevoTexto será "Hola Java"
+```
+
+- **`indexOf(String str)`**: Devuelve la posición (índice) de la primera aparición de la secuencia de caracteres especificada (`str`) en la cadena. Si no la encuentra, devuelve `-1`.  
+```java
+  String texto = "Hola Mundo";
+  int posicion = texto.indexOf("Mundo"); // posicion será 5
+```
+
+
 ---
