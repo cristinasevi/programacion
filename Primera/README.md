@@ -182,5 +182,11 @@ switch (variable) {
   int posicion = texto.indexOf("Mundo"); // posicion será 5
 ```
 
+- **`concat(String str)`**: Concatena (une) la cadena actual con otra cadena (`str`) y devuelve una nueva cadena resultante de la unión.  
+```java
+  String saludo = "Hola";
+  String mundo = " Mundo";
+  String frase = saludo.concat(mundo); // frase será "Hola Mundo"
+```
 
 ---
