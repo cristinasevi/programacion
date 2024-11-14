@@ -10,7 +10,7 @@ public class Ejercicio084 {
         String frase = "5Cinco 6Seis 2Dos 4Cuatro 1Uno 3Tres ";
         String vector[];
         
-        // Contar la cantidad de palabras en la frase e inicializar el vector
+        // Instanciamos el vector
         int cont = 0;
         int posicion = frase.indexOf(" ");
         while(posicion != -1) {
@@ -19,29 +19,33 @@ public class Ejercicio084 {
         }
         vector = new String[cont];
         
-        // Dividir la frase en palabras y almacenarlas en el vector
-        int inicio = 0;
+        // Cargamos el vector con las palabras
         int k = 0;
-        for(int i=0; i<frase.length(); i++) {
-            if(frase.charAt(i) == ' ') {
-                vector[k++] = frase.substring(inicio, i);
-                inicio = i + 1;
-            }
+        int inicio = 0;
+        int fin = frase.indexOf(" ");
+        while(fin != -1) {
+            vector[k++] = frase.substring(inicio, fin+1);
+            inicio = fin + 1;
+            fin = frase.indexOf(" ", inicio);
         }
         
-        // Ordenar el vector alfabéticamente (método burbuja)
+        // Ordenar los elementos del vector
+        String inter;
         for(int i=0; i<vector.length-1; i++){
-            for(int j=vector.length-1; j>i; j--){       
-                if(vector[j] < vector[j-1]){
+            for(int j=vector.length-1; j>i; j--){  
+                if(vector[j].compareTo(vector[j - 1]) < 0){
                     inter = vector[j];
-                    vector[j] = vector[j-1];
-                    vector[j-1] = inter;
+                    vector[j] = vector[j - 1];
+                    vector[j - 1] = inter;
                 }
             }
-        }
-         
-         
-         
-         
+        }  
+        
+        // Cargar frase con los elementos del vector
+        frase = "";
+        for(int i=0; i<vector.length; i++)
+            frase = frase.concat(vector[i]);
+        
+        System.out.println(frase);
     }
 }
