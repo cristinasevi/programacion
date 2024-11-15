@@ -189,4 +189,10 @@ switch (variable) {
   String frase = saludo.concat(mundo); // frase será "Hola Mundo"
 ```
 
+- **`Character.toString(char c)`**: Convierte un carácter (`char`) en una cadena de texto (`String`).  
+```java
+  char letra = 'A';
+  String texto = Character.toString(letra); // texto será "A"
+```
+
 ---
