@@ -6,7 +6,7 @@ package Primera;
 
 public class Ejercicio031 {
     public static void main(String arg[]) {
-    int kilos[][] = { {10, 20, 30, 40, 50}, 
+        int kilos[][] = { {10, 20, 30, 40, 50}, 
                           {50, 60, 70, 80, 80},
                           {90, 100, 110, 120, 30} };
         String productos[] = {"Naranjas", "Manzanas", "Peras"};
@@ -21,6 +21,7 @@ public class Ejercicio031 {
             total += acum;
             System.out.printf("Precio de %s: %.2f €\n", productos[i], acum); // %.2f -> double
         }
+     
         System.out.printf("Total: %.2f\n", total);
     }
 }
