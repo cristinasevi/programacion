@@ -6,7 +6,7 @@ package Primera;
 
 public class Ejercicio032 {
     public static void main(String arg[]) {
-    int salas[][] = {   {10, 20, 30, 40, 50, 200, 180}, 
+        int salas[][] = {   {10, 20, 30, 40, 50, 200, 180}, 
                         {50, 60, 70, 80, 80, 300, 198},
                         {90, 100, 110, 120, 130, 150, 120}  };
         String dias[] = {"Lunes", "Martes", "Miércoles", "Jueves", 
