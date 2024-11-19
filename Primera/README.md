@@ -176,6 +176,14 @@ switch (variable) {
   String nuevoTexto = texto.replace("Mundo", "Java"); // nuevoTexto será "Hola Java"
 ```
 
+- **`replaceAll(String regex, String replacement)`**: Reemplaza todas las ocurrencias que coincidan con la expresión regular (`regex`) en la cadena original por la cadena especificada (`replacement`). Devuelve una nueva cadena con los reemplazos aplicados.  
+
+```java
+  String texto = "Hola     Mundo";
+  String nuevoTexto = texto.replaceAll(" +", "-"); // nuevoTexto será "Hola --- Mundo"
+  // " +" es una expresión que significa uno o más espacios en blanco consecutivos.
+```
+
 - **`indexOf(String str)`**: Devuelve la posición (índice) de la primera aparición de la secuencia de caracteres especificada (`str`) en la cadena. Si no la encuentra, devuelve `-1`.  
 ```java
   String texto = "Hola Mundo";
