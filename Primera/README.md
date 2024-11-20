@@ -220,16 +220,16 @@ El factorial de un número \( n \) (representado como \( n! \)) es el producto d
 **Código:**
 ```java
 public class Recursividad {
-    public static int factorial(int n) {
-        if (n == 0) {
-            return 1; // Caso base
-        } else {
-            return n * factorial(n - 1); // Caso recursivo
-        }
+    public static void main(String arg[]){
+        int resultado = factorial(5);
+        System.out.println("El resultado es " + resultado);
     }
-
-    public static void main(String[] args) {
-        System.out.println(factorial(5)); // Salida: 120
+    
+    public static int factorial(int a) {
+        if(a == 1)
+            return a;
+        else
+            return factorial(a-1) * a;
     }
 }
 ```
