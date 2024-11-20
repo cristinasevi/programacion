@@ -203,4 +203,35 @@ switch (variable) {
   String texto = Character.toString(letra); // texto será "A"
 ```
 
+### Recursividad
+
+La **recursividad** es una técnica en programación donde una función se llama a sí misma para resolver un problema. Se utiliza comúnmente cuando un problema puede dividirse en subproblemas más pequeños del mismo tipo.
+
+Una función recursiva consta de dos partes principales:
+1. **Caso base**: Condición que detiene la recursión para evitar un bucle infinito.
+2. **Caso recursivo**: Parte en la que la función se llama a sí misma con un subproblema más pequeño.
+
+#### Ejemplo: Factorial de un número
+
+El factorial de un número \( n \) (representado como \( n! \)) es el producto de todos los números enteros desde 1 hasta \( n \). Puede definirse recursivamente como:
+- \( 0! = 1 \) (caso base)
+- \( n! = n \times (n-1)! \) (caso recursivo)
+
+**Código:**
+```java
+public class Recursividad {
+    public static int factorial(int n) {
+        if (n == 0) {
+            return 1; // Caso base
+        } else {
+            return n * factorial(n - 1); // Caso recursivo
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(factorial(5)); // Salida: 120
+    }
+}
+```
+
 ---
