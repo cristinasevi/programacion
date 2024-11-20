@@ -9,21 +9,24 @@ public class Ejercicio089 {
         String fraseA = "";
         String fraseB = "";
         
-        boolean alternar = true;
-        alternar = !alternar;
-        
         int inicio = 0;
         int fin = frase1.indexOf(" ");
+        boolean enFA = true;
         
         while(fin != -1) {
-            if(fin != -1) {
-                fraseA += frase1.substring(inicio, fin + 1);
-                fraseB += fraseA.substring(inicio, fin + 1);
-                inicio = fin + 1;
-                fin = frase1.indexOf(" ", inicio);
+            if(enFA) {
+                fraseA = fraseA.concat(frase1.substring(inicio, fin+1));
+                enFA = false;
             }
+            else {
+                fraseB = fraseB.concat(frase1.substring(inicio, fin+1));
+                enFA = true;
+            }
+            inicio = fin + 1;
+            fin = frase1.indexOf(" ", inicio);
         }
         
-        System.out.println(fraseA + " " + fraseB);
+        System.out.println(fraseA);
+        System.out.println(fraseB);
     }
 }
