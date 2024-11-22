@@ -234,4 +234,44 @@ public class Recursividad {
 }
 ```
 
+### Atributos de una clase
+
+Los **atributos** de una clase son variables que se definen directamente dentro de la clase, pero fuera de cualquier método, constructor o bloque. Representan las propiedades o el estado de los objetos creados a partir de esa clase.
+
+- **Ubicación**: Se declaran justo debajo de la definición de la clase (`public class`), pero fuera del método `main` o cualquier otro método.
+
+- **Alcance**: Son **variables globales** que pueden ser accedidas y modificadas por cualquier método dentro de la clase. Sin embargo, su visibilidad fuera de la clase depende del modificador de acceso utilizado.
+
+#### Modificadores de acceso comunes:
+
+- **`public`**: El atributo es accesible desde cualquier clase.
+- **`private`**: Solo accesible dentro de la propia clase.
+- **`protected`**: Accesible dentro de la misma clase, sus subclases y otras clases del mismo paquete.
+- **Sin modificador** (paquete): Accesible desde clases dentro del mismo paquete.
+
+#### Ejemplo:
+
+```java
+public class Persona {
+    // Atributos de la clase
+    private String nombre;  // Solo accesible dentro de esta clase
+    public int edad;        // Accesible desde cualquier clase
+    protected double altura; // Accesible desde el mismo paquete o subclases
+
+    // Constructor
+    public Persona(String nombre, int edad, double altura) {
+        this.nombre = nombre;  // Usamos "this" para diferenciar entre el atributo y el parámetro
+        this.edad = edad;
+        this.altura = altura;
+    }
+
+    // Método para mostrar información
+    public void mostrarInfo() {
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Edad: " + edad);
+        System.out.println("Altura: " + altura);
+    }
+}
+```
+
 ---
