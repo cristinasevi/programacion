@@ -16,7 +16,7 @@ Para reservar memoria en Java, se utilizan las siguientes sintaxis:
   int vector = new int[4]
 - Para instanciaruna vector bidimensional:
   ```java
-  int tabla[][] = new int[4][] // se representa como new int[columna][fila]
+  int tabla[][] = new int[4][4] // se representa como new int[columna][fila]
 
 ### Operadores lógicos
 
