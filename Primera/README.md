@@ -123,17 +123,18 @@ La estructura `switch` permite ejecutar diferentes bloques de código según el 
 - **`default`**: Define el caso predeterminado, que se ejecuta si ningún otro `case` coincide con la expresión. Es opcional.
 
 ```java
-switch (variable) {
-  case valor1:
-    // Código a ejecutar si variable == valor1
-    break;
-  case valor2:
-    // Código a ejecutar si variable == valor2
-    break;
-  default:
-    // Código a ejecutar si ningún caso coincide
+switch(frase[i]) {
+  case 'A': case 'E': case 'I': case 'O': case 'U': // Código a ejecutar si variable es igual a estos casos
+      frase[i] = Character.toLowerCase(frase[i]);
+      break;
+  case 'a': case 'e': case 'i': case 'o': case 'u': // Código a ejecutar si variable es igual a estos casos
+      frase[i] = Character.toUpperCase(frase[i]);
+      break;
+  default: // Código a ejecutar si ningún caso coincide
+      frase[i] = '-';
 }
 ```
+
 ### Funciones de la clase `String`
 
 - **`length()`**: Devuelve la longitud de la cadena (número de caracteres).
