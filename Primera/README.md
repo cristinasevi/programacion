@@ -274,4 +274,19 @@ public class Persona {
 }
 ```
 
+### Constantes
+
+Las constantes se declaran utilizando el modificador **`final`**. Este modificador indica que el valor de la variable no puede cambiar después de su inicialización.
+
+#### Características:
+- Se utiliza principalmente para definir valores que no deben ser modificados durante la ejecución del programa.
+- Los nombres de las constantes se escriben en **mayúsculas** y separar palabras con guiones bajos (`_`) para diferenciarlas de otras variables.
+
+#### Ejemplo:
+```java
+public class Ejemplo {
+    final int ESCANOS = 7; // Declaración de una constante
+}
+```
+
 ---
