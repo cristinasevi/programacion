@@ -47,7 +47,7 @@ Se delimitan con comillas simples (' ')
 
 ### Métodos
 
-- Los nombres de lo métodos empiezan en minúscula.
+- Los nombres de los métodos empiezan en minúscula.
 - Los métodos que crees tienes que llamarlos en la función principal `main`.
 
 #### -  Tipos de retorno
