@@ -24,7 +24,7 @@ public class Ejercicio099 {
             for(int i=0; i<notas.length; i++)
                 if(notas[i][j] < 5)
                     cont++;
-                System.out.printf("En la asignatura %s han suspendido %d alumnos\n", asignaturas[j], cont);
+            System.out.printf("En la asignatura %s han suspendido %d alumnos\n", asignaturas[j], cont);
         }
 
         // Realizar la media de las notas menores a 5.
