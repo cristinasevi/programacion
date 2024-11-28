@@ -4,7 +4,7 @@
  */
 package Primera.Examen;
 
-public class Examen001 {
+public class Ejercicio001 {
     public static void main(String[] args) {
         int vector[] = {23, 300, 48, 6, 3, 90, 35, 89, 123, 12};
         int n = 30;
