@@ -2,7 +2,7 @@
  Implementa una función que reciba un vector de 10 enteros y un número entero ‘n’ 
  y devuelva un nuevo vector que contenga sólo los elementos del primer vector que sean mayores que ‘n’.
  */
-package Primera.CristinaSerrano;
+package Primera.Examen;
 
 public class Ejercicio001 {
     public static void main(String[] args) {

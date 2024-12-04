@@ -2,7 +2,7 @@
  Implementa un programa en el que, dada una cadena de caracteres, elimine todos 
  los caracteres duplicados consecutivos.  Actuando sobre la cadena original.
  */
-package Primera.CristinaSerrano;
+package Primera.Examen;
 
 public class Ejercicio004 {
     public static void main(String[] args) {

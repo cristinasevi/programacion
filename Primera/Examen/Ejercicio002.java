@@ -3,7 +3,7 @@
  todas las apariciones de la palabra en el String y la oculte con asteriscos.  
  También deberá mostrar las posiciones en las que ha aparecido la palabra dentro del String.
  */
-package Primera.CristinaSerrano;
+package Primera.Examen;
 
 public class Ejercicio002 {
     public static void main(String[] args) {
