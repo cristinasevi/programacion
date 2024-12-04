@@ -1,7 +1,7 @@
 /*
  Implementar un método recursivo que reciba un número entero y devuelva la suma de sus dígitos.
  */
-package Primera.Examen;
+package Primera.CristinaSerrano;
 
 public class Ejercicio005 {
     public static void main(String[] args) {

@@ -2,7 +2,7 @@
  Implementa una función que reciba un vector de 10 enteros y un número entero ‘n’ 
  y devuelva un nuevo vector que contenga sólo los elementos del primer vector que sean mayores que ‘n’.
  */
-package Primera.Examen;
+package Primera.CristinaSerrano;
 
 public class Ejercicio001 {
     public static void main(String[] args) {
@@ -17,9 +17,10 @@ public class Ejercicio001 {
     
     public static int[] mayores(int vector[], int n) {
         int vector2[] = new int[10];
+        int pos = 0;
         for(int i=0; i<vector.length; i++) {
             if(vector[i] > n) {
-                vector2[i] = vector[i];
+                vector2[pos++] = vector[i];
             }
         }      
         

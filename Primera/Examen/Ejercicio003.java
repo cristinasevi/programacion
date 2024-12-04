@@ -3,7 +3,7 @@
  otra matriz de 3*3 con los valores de la matriz original rotados 90º.  
  Tal y como veis en el ejemplo.  El contenido de la matriz rotada debe mostrarse por pantalla.
  */
-package Primera.Examen;
+package Primera.CristinaSerrano;
 
 public class Ejercicio003 {
     public static void main(String[] args) {
