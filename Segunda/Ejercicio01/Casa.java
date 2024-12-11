@@ -1,7 +1,7 @@
 /*
  Clase -> son definiciones en los que añades atributos
  Los métodos se encargan de cambiar el valor de esos atributos
- Método constructor -> instancia objetos de la clase, no devuelve nada (ni siquiera void) y se llama igual que la clase4
+ Método constructor -> instancia objetos de la clase, no devuelve nada (ni siquiera void) y se llama igual que la clase
  Método getter -> devuelve valor de un atributo 
  Método setter -> modifica el valor del atributo 
  */
@@ -58,12 +58,12 @@ public class Casa {
     }
     
     // Método que muestre por pantalla una frase con las características de una casa
-    public String getCasa() {
-        return "Casa en " + direccion + " con " + numMetros + " metros cuadrados, construida con " + material + " y " + numHabitaciones + " habitaciones.";
+    public void mostrar() {
+        System.out.printf("Dirección: %s, número de metros: %.2f, material: %s, número de habitaciones: %d\n", direccion, numMetros, material, numHabitaciones);
     }
 }
 
 /*
  Crear Métodos automáticamente: 
- Boton detecha -> Insert Code -> Getter o Setter
+ Boton detecha -> Insert Code -> Constructor o Getter o Setter
 */
