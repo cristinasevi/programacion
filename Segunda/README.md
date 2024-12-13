@@ -79,6 +79,59 @@ public class Chalet extends Casa {
 }
 ```
 
+### Manejo de Excepciones
+
+Las excepciones son mecanismos para manejar errores en tiempo de ejecución. Se generan automáticamente cuando ocurre un error o se pueden lanzar manualmente con `throw`.
+
+#### Conceptos Clave
+
+- **`throws Exception`**: Declara que un método puede lanzar una excepción, lo que obliga al código que lo llama a manejar esa excepción.
+- **`throw`**: Lanza una excepción manualmente.
+- **`try`**: Define un bloque de código que puede generar excepciones.
+- **`catch`**: Maneja las excepciones lanzadas dentro de un bloque `try`.
+
+#### Ejemplo:
+```java
+public Nif(int dni, char letra) throws Exception {
+    this.dni = dni;
+    if(letra != tabla[dni%23])
+        throw new Exception("Has introducido mal la letra"); 
+    this.letra = letra;
+}
+```
+En este ejemplo, si la letra no coincide con el valor esperado, se lanza una excepción con un mensaje específico.
+
+### Manejo de Excepciones con `try` y `catch`
+
+```java
+try {
+    System.out.println("Hola" + (20 / 0));
+} catch (ArithmeticException e) {
+    System.out.println("Se ha producido un ERROR: " + e);
+}
+```
+En este caso:
+- El bloque `try` intenta ejecutar un código que podría causar una excepción.
+- Si ocurre una excepción, el bloque `catch` la maneja, imprimiendo un mensaje de error.
+
+### Notas Adicionales:
+- Las excepciones heredan de la clase `Exception`.
+- Puedes personalizar el manejo de errores mediante múltiples bloques `catch` o mediante excepciones definidas por el usuario.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Creación Automática de Métodos
 
 Puedes generar métodos de manera automática en algunos entornos de desarrollo integrado (IDE), como sigue:
