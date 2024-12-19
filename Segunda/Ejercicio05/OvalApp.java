@@ -28,9 +28,9 @@ public class OvalApp extends Frame{
         panel.add(boton2);
         
         this.add("South", panel); // Hay que ponerle un String de dónde y el qué vamos a meter
-        this.pack();
-        this.resize(300,300);
-        this.show();
+        this.pack(); // Empaqueta todo lo que vayas metiendo al Frame
+        this.resize(300,300); // Da dimensiones al Frame (ya no se usa resize, se usa setSize)
+        this.show(); // Pone visible el Frame (ya no se usa show, se usa setVisible)
     } 
     
     public void paint(Graphics g) {
