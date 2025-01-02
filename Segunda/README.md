@@ -28,6 +28,14 @@ Los métodos son las funciones dentro de una clase que permiten realizar operaci
 
 ### Modificadores
 
+#### Constantes
+
+Las constantes se deben escribir en mayúsculas, separando las palabras con guiones bajos (`_`).
+```java
+public static final int FILAS = 6;
+public static final int COLUMNAS = 8;
+```
+
 #### Encapsulamiento y Visibilidad
 
 - **`private`**: Los atributos privados están protegidos y no se pueden acceder directamente desde fuera de la clase. Para interactuar con ellos, se utilizan los métodos `getter` y `setter`.
@@ -118,20 +126,6 @@ En este caso:
 - Las excepciones heredan de la clase `Exception`.
 - Puedes personalizar el manejo de errores mediante múltiples bloques `catch` o mediante excepciones definidas por el usuario.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### Creación Automática de Métodos
 
 Puedes generar métodos de manera automática en algunos entornos de desarrollo integrado (IDE), como sigue:
@@ -170,5 +164,98 @@ public class Ejecutable {
     }
 }
 ```
+
+### Importación de clases
+
+`import java.util.`
+- **Random**: es una clase que contiene métodos para generar números aleatorios.
+  - **`nextInt()`**: método que devuelve un número entero aleatorio.
+
+`import java.awt.`
+- **Frame**: Clase base para crear una ventana. Permite agregar componentes como botones, paneles y otros elementos gráficos.
+  - `BorderLayout`: distribución que los elementos los ubica norte, sur, este, oeste y centro.
+  - `LinearLayout`: ubica los elementos en línea.
+- **Event**: Clase que maneja los eventos (acciones) que se producen dentro de la interfaz.
+- **Button**: Clase que representa un botón que los usuarios pueden presionar.
+- **Panel**: Contenedor que organiza y agrupa otros componentes.
+- **Graphics**: Clase utilizada para dibujar en la ventana (por ejemplo: formas geométricas).
+- **Color**: Maneja colores en gráficos. Espera recibir 3 parámetros entre 0 y 255 (RGB).
+- **GridLayout**: Organiza los componentes en una cuadrícula, dividiendo el espacio en un número de filas y columnas.
+- **Label**: Muestra texto estático en la interfaz gráfica.
+- **MenuBar**: Crea una barra de menús, que puede contener menús como "Archivo", "Editar", etc.
+- **Menu**: Crea un menú dentro de una barra de menús. Los elementos de un menú son de tipo `MenuItem`.
+- **MenuItem**: representa un elemento dentro de un menú. Un `MenuItem` puede ejecutar una acción cuando el usuario lo selecciona.
+
+### Métodos en el Frame
+
+#### Creación de instancias de clases
+
+```java
+Panel panel = new Panel();  
+Button boton1 = new Button("Siguiente");
+```
+
+#### Agregar objetos al Frame
+
+```java
+panel.add(boton1); // Agrega el boton1 al panel
+this.add("South", panel); // Agrega el panel al sur del Frame
+this.pack(); // Ajusta el tamaño del Frame para que se ajuste al contenido
+this.resize(300,300); // Ajusta las dimensiones del Frame (se recomienda usar setSize())
+this.show(); // Muestra el Frame (se recomienda usar setVisible(true))
+```
+
+#### Método inicializar
+
+```java
+public void inicializar() {
+    posX = r.nextInt(200);
+    posY = r.nextInt(200);
+    anchura = r.nextInt(100);
+    altura = r.nextInt(100);
+    color = new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
+}
+```
+
+### Funciones Gráficas 
+
+- **setColor(Color c)**: Establece el color del objeto Graphics para los siguientes dibujos.
+- **drawOval(int x, int y, int width, int height)**: Dibuja un óvalo solo con el contorno, sin relleno.
+- **fillOval(int x, int y, int width, int height)**: Dibuja un óvalo relleno con el color establecido.
+
+#### Método paint
+
+Llama al método dibujar de la clase Ovalo, pasando el objeto Graphics, lo que permite dibujar el óvalo en la ventana.
+
+```java
+public void paint(Graphics g) {
+    ovalo.dibujar(g);
+}
+```
+
+### Método handleEvent
+
+```java
+public boolean handleEvent(Event ev) {
+    if(ev.id == Event.WINDOW_DESTROY) { // Evento de cerrar la ventana
+        System.exit(0);  // Termina la aplicación
+        return true;
+    } else if(ev.id == Event.ACTION_EVENT) {  // Evento de acción (como presionar un botón)
+        if(ev.target instanceof Button) {  // Verifica si el evento proviene de un botón
+            if(ev.arg.equals("Salir")) {  // Si el botón es "Salir"
+                System.exit(0);  // Termina la aplicación
+                return true;
+            } else if(ev.arg.equals("Siguiente")) {  // Si el botón es "Siguiente"
+                ovalo.inicializar();  // Inicializa o restablece el objeto óvalo
+                repaint();  // Redibuja la ventana
+                return true;
+            }
+        }
+    }
+    return false;
+}
+```
+
+
 
 ---
