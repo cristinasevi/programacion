@@ -12,10 +12,21 @@ import java.awt.Button;
 import java.awt.MenuBar;
 import java.awt.Menu;
 import java.awt.MenuItem;
+import java.awt.Cursor;
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.Font;
 
 public class FrameApp extends Frame{ // extends Frame -> crea una ventana
     MenuBar porDefecto, alternativo;
     String tituloInicial;
+    // tipos de cursor
+    int cursores[] = {Cursor.CROSSHAIR_CURSOR, Cursor.DEFAULT_CURSOR, Cursor.E_RESIZE_CURSOR, Cursor.HAND_CURSOR, Cursor.MOVE_CURSOR, Cursor.NE_RESIZE_CURSOR, Cursor.NW_RESIZE_CURSOR, Cursor.N_RESIZE_CURSOR, Cursor.TEXT_CURSOR, Cursor.WAIT_CURSOR};
+    int posCursor = 0;
+    Color colores[] = {Color.BLACK, Color.BLUE, Color.CYAN, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY, Color.MAGENTA, Color.ORANGE, Color.PINK, Color.RED, Color.YELLOW};
+    int posColor = 0;
+    String fuentes[] = {"Helvetica", "TimesRoman", "Courier", "Dialog", "DialogInput", "Arial"};
+    int posLetra = 0;
     public static void main(String[] args) {
         FrameApp app = new FrameApp();
     }
@@ -31,6 +42,10 @@ public class FrameApp extends Frame{ // extends Frame -> crea una ventana
         this.pack(); // Empaqueta todo lo que vayas metiendo al Frame
         this.setSize(400, 400); // Da dimensiones al Frame
         this.setVisible(true);
+    }
+    
+    public void paint(Graphics g) {
+        g.drawString("Cambia el color al pulsar Foreground", 100, 150); // drawString("texto_que_quieres_meter", posX, posY)
     }
 
     public void setup() {
@@ -81,12 +96,34 @@ public class FrameApp extends Frame{ // extends Frame -> crea una ventana
                         this.setTitle(tituloInicial);
                     return true;
                 }
-            }
-            if(ev.arg.equals("MenuBar")) {
-                if(this.getMenuBar() == porDefecto)
-                    this.setMenuBar(alternativo);
-                else
-                    this.setMenuBar(porDefecto);
+                else if(ev.arg.equals("MenuBar")) {
+                    if(this.getMenuBar() == porDefecto)
+                        this.setMenuBar(alternativo);
+                    else
+                        this.setMenuBar(porDefecto);
+                    return true;
+                }
+                else if(ev.arg.equals("Resizable")) {
+                    this.setResizable(!this.isResizable()); // isResizable es la forma de preguntar
+                    return true;
+                }
+                else if(ev.arg.equals("Cursor")) {
+                    this.setCursor(cursores[(posCursor++) % cursores.length]); // Cambia el tipo de cursor
+                    return true;
+                }
+                else if(ev.arg.equals("Background")) {
+                    this.setBackground(colores[(posColor++) % colores.length]); // Cambia el color de fondo
+                    return true;
+                }
+                else if(ev.arg.equals("Foreground")) {
+                    this.setForeground(colores[(posColor++) % colores.length]); // Cambia el color de letra
+                    return true;
+                }
+                else if(ev.arg.equals("Font")) {
+                    this.setFont(new Font(fuentes[(posLetra++) % fuentes.length], Font.BOLD, 15)); // Cambia el tipo de fuente y tamaño de letra
+                    repaint();
+                    return true;
+                }
             }
         }
         return false;
