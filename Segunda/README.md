@@ -172,19 +172,48 @@ public class Ejecutable {
   - **`nextInt()`**: método que devuelve un número entero aleatorio.
 
 `import java.awt.`
+
+#### Ventanas y Contenedores
 - **Frame**: Clase base para crear una ventana. Permite agregar componentes como botones, paneles y otros elementos gráficos.
   - `BorderLayout`: distribución que los elementos los ubica norte, sur, este, oeste y centro.
   - `LinearLayout`: ubica los elementos en línea.
-- **Event**: Clase que maneja los eventos (acciones) que se producen dentro de la interfaz.
-- **Button**: Clase que representa un botón que los usuarios pueden presionar.
 - **Panel**: Contenedor que organiza y agrupa otros componentes.
-- **Graphics**: Clase utilizada para dibujar en la ventana (por ejemplo: formas geométricas).
-- **Color**: Maneja colores en gráficos. Espera recibir 3 parámetros entre 0 y 255 (RGB).
+
+#### Diseño y Estilo
 - **GridLayout**: Organiza los componentes en una cuadrícula, dividiendo el espacio en un número de filas y columnas.
+- **Font**: Clase que permite manejar estilos y tamaños de fuentes para el texto en componentes gráficos.
+- **Color**: Maneja colores en gráficos. Espera recibir 3 parámetros entre 0 y 255 (RGB).
+
+#### Interacción y Eventos
+- **Event**: Clase que maneja los eventos (acciones) que se producen dentro de la interfaz.
+- **Cursor**: Representa el cursor en una aplicación gráfica. Puedes personalizar el cursor para que cambie dependiendo del contexto (por ejemplo, una mano, un texto, una cruz...).
+
+#### Componentes Gráficos
+- **Graphics**: Clase utilizada para dibujar en la ventana (por ejemplo: formas geométricas).
+- **Button**: Clase que representa un botón que los usuarios pueden presionar.
 - **Label**: Muestra texto estático en la interfaz gráfica.
+- **TextArea**: Representa un área de texto donde los usuarios pueden escribir múltiples líneas.
+- **FileDialog**: Abre un cuadro de diálogo que permite al usuario seleccionar un archivo para abrir o guardar.
+
+#### Menús
 - **MenuBar**: Crea una barra de menús, que puede contener menús como "Archivo", "Editar", etc.
 - **Menu**: Crea un menú dentro de una barra de menús. Los elementos de un menú son de tipo `MenuItem`.
 - **MenuItem**: representa un elemento dentro de un menú. Un `MenuItem` puede ejecutar una acción cuando el usuario lo selecciona.
+
+`import java.io.`
+
+#### Lectura de Archivos
+- **DataInputStream**: Permite leer datos primitivos (como enteros, flotantes o caracteres) de un flujo de entrada (generalmente un archivo).
+- **FileInputStream**: Clase para leer bytes de un archivo. Suele utilizarse para leer archivos binarios.
+
+#### Escritura de Archivos
+- **FileOutputStream**: Clase para escribir bytes en un archivo. Es útil para crear o modificar archivos binarios.
+- **DataOutputStream**: Permite escribir datos primitivos en un flujo de salida, como un archivo.
+
+#### Manejo de Errores
+- **FileNotFoundException**: Excepción que se lanza cuando un archivo no se encuentra o no se puede abrir.
+- **IOException**: Excepción general para manejar errores relacionados con entrada y salida de datos (como problemas al leer o escribir en archivos).
+
 
 ### Métodos en el Frame
 
@@ -201,8 +230,8 @@ Button boton1 = new Button("Siguiente");
 panel.add(boton1); // Agrega el boton1 al panel
 this.add("South", panel); // Agrega el panel al sur del Frame
 this.pack(); // Ajusta el tamaño del Frame para que se ajuste al contenido
-this.resize(300,300); // Ajusta las dimensiones del Frame (se recomienda usar setSize())
-this.show(); // Muestra el Frame (se recomienda usar setVisible(true))
+this.setSize(300,300); // Ajusta las dimensiones del Frame (es lo mismo que resize())
+this.setVisible(true); // Muestra el Frame (es lo mismo que show())
 ```
 
 #### Método inicializar
