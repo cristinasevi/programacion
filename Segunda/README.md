@@ -183,10 +183,12 @@ public class Ejecutable {
 - **GridLayout**: Organiza los componentes en una cuadrícula, dividiendo el espacio en un número de filas y columnas.
 - **Font**: Clase que permite manejar estilos y tamaños de fuentes para el texto en componentes gráficos.
 - **Color**: Maneja colores en gráficos. Espera recibir 3 parámetros entre 0 y 255 (RGB).
+  Ejemplos: `Color.BLACK`, `Color.BLUE`, `Color.CYAN`, `Color.DARK_GRAY`, `Color.GRAY`, `Color.LIGHT_GRAY`, `Color.MAGENTA`, `Color.ORANGE`, `Color.PINK`, `Color.RED`, `Color.YELLOW`.
 
 #### Interacción y Eventos
 - **Event**: Clase que maneja los eventos (acciones) que se producen dentro de la interfaz.
 - **Cursor**: Representa el cursor en una aplicación gráfica. Puedes personalizar el cursor para que cambie dependiendo del contexto (por ejemplo, una mano, un texto, una cruz...).
+  Ejemplos: `Cursor.CROSSHAIR_CURSOR`, `Cursor.DEFAULT_CURSOR`, `Cursor.E_RESIZE_CURSOR`, `Cursor.HAND_CURSOR`, `Cursor.MOVE_CURSOR`, `Cursor.NE_RESIZE_CURSOR`, `Cursor.NW_RESIZE_CURSOR`, `Cursor.N_RESIZE_CURSOR`,`Cursor.TEXT_CURSOR`, `Cursor.WAIT_CURSOR`.
 
 #### Componentes Gráficos
 - **Graphics**: Clase utilizada para dibujar en la ventana (por ejemplo: formas geométricas).
