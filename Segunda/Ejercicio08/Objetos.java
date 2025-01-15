@@ -14,6 +14,10 @@ import java.awt.TextField;
 import java.awt.TextArea;
 import java.awt.Button;
 import java.awt.Choice;
+import java.awt.List;
+import java.awt.Canvas;
+import java.awt.Graphics;
+import java.awt.Checkbox;
 
 public class Objetos extends Frame{ 
     TextArea textArea;
@@ -51,10 +55,19 @@ public class Objetos extends Frame{
         paneles[0][2].add(new MiBoton("Borrar", textArea)); // espera recibir el texto que va a tener el botón y el textArea (según la función creada abajo)
         
         String opciones[] = {"Sí", "No", "Quizás"};
+        paneles[1][0].add(new MiChoice(opciones, textArea)); // espera recibir un vector de Strings y un TextArea (según la función creada abajo)
         
-        principal.add(paneles[0][0]);
-        principal.add(paneles[0][1]);
-        principal.add(paneles[0][2]);
+        String deportes[] = {"Atletismo", "Baloncesto", "Tenis", "Esgrima", "Balonmano", "Patinaje"};
+        paneles[1][1].add(new MiLista(deportes, textArea));
+        
+        paneles[1][2].add(new MiCanvas()); // no espera recibir ningún parámetro (según la función creada abajo)
+        
+        String alimentos[] = {"Patatas", "Cebollas", "Tomates", "Lechuga"};
+        paneles[2][0].add(new MiCheckBoxGroup(alimentos));
+        
+        for(int i=0; i<3; i++)
+            for(int j=0; j<3; j++)
+                principal.add(paneles[i][j]);
         
         this.add("Center", principal);
     }
@@ -101,7 +114,87 @@ class MiChoice extends Choice {
         textoAreaB = texto2;
     }
     public boolean action(Event ev, Object obj) {
-        textoAreaB.setText();
+        textoAreaB.setText(this.getSelectedItem());
         return true;
+    }
+}
+
+class MiLista extends List {
+    private final TextArea textoAreaC;
+    public MiLista(String deportes[], TextArea textoAreaC) {
+        super(5, true); // 5 porque queremos mostrar 5 elementos de la lista
+        this.textoAreaC = textoAreaC;
+        for(int i=0; i<deportes.length; i++)
+            this.add(deportes[i]);
+    }
+    public boolean handleEvent(Event ev) {
+        if(ev.id == Event.ACTION_EVENT) {
+            this.textoAreaC.setText("Doble Click");
+            return true;
+        }
+        else if(ev.id == Event.LIST_SELECT) {
+            this.textoAreaC.setText("Selecciono un elemento");
+            String elementos[] = this.getSelectedItems();
+            String texto = "";
+            for(int i=0; i<elementos.length; i++)
+                texto += elementos[i] + "\n";
+            this.textoAreaC.setText(texto);
+            return true;
+        }
+        else if(ev.id == Event.LIST_DESELECT) {
+            this.textoAreaC.setText("Deselecciono un elemento");
+            return true;
+        }
+        return false;
+    }
+}
+
+class MiCanvas extends Canvas {
+    int posx = 20;
+    int posy = 20;
+    public MiCanvas() {
+        super();
+        this.setSize(75, 75);
+        this.setBackground(Color.YELLOW);
+        this.setForeground(Color.RED);
+        this.setVisible(true);
+    }
+    
+    public void paint(Graphics g) {
+        g.fillRect(posx, posy, 5, 5); // declaramos un rectángulo
+    }
+    
+    public boolean mouseDown(Event ev, int x, int y) {
+        posx = x;
+        posy = y;
+        repaint();
+        return true;
+    }
+}
+
+class MiCheckBoxGroup extends Panel {
+    Checkbox checkBoxes[];
+    TextField resultado;
+
+    public MiCheckBoxGroup(String elementos[]) {
+        super();
+        this.setLayout(new GridLayout(elementos.length + 1, 1)); // se pondrán los elementos unos debajo de otros
+        checkBoxes = new Checkbox[elementos.length];
+        for(int i=0; i<elementos.length; i++) {
+            checkBoxes[i] = new Checkbox(elementos[i]);
+            this.add(checkBoxes[i]);
+        }
+        
+        resultado = new TextField("", 15);
+        this.add(resultado);
+    }
+    
+    public boolean action(Event ev, Object obj) {
+        String mostrar = "";
+        for(int i=0; i<checkBoxes.length; i++)
+            if(checkBoxes[i].getState())
+                mostrar += checkBoxes[i].getLabel() + " ";
+        resultado.setText(mostrar);
+        return false;
     }
 }
