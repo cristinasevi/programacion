@@ -22,7 +22,7 @@ public class Restaurante extends Frame {
     TextField texto;
     
     public static void main(String arg[]) {
-    Restaurante app = new Restaurante();
+        Restaurante app = new Restaurante();
     }
     
     public Restaurante() {
@@ -72,7 +72,10 @@ public class Restaurante extends Frame {
         }
         else if((ev.id == Event.LIST_SELECT) || (ev.id == Event.LIST_DESELECT)) {
             String frase = chComida.getSelectedItem() + ": ";
-            presentar.getSelectedItems();
+            String elecciones[] = presentar.getSelectedItems();
+            for(int i=0; i<elecciones.length; i++)
+                frase = frase.concat(" ").concat(elecciones[i]);
+            texto.setText(frase);
         }
         return false;
     } 
