@@ -181,6 +181,7 @@ public class Ejecutable {
 
 #### Diseño y Estilo
 - **GridLayout**: Organiza los componentes en una cuadrícula, dividiendo el espacio en un número de filas y columnas.
+- **FlowLayout**: Organiza los componentes de forma secuencial (de izquierda a derecha). Los elementos se reubican en nuevas líneas cuando no hay suficiente espacio horizontal.
 - **Font**: Clase que permite manejar estilos y tamaños de fuentes para el texto en componentes gráficos.
 - **Color**: Maneja colores en gráficos. Espera recibir 3 parámetros entre 0 y 255 (RGB).
   Ejemplos: `Color.BLACK`, `Color.BLUE`, `Color.CYAN`, `Color.DARK_GRAY`, `Color.GRAY`, `Color.LIGHT_GRAY`, `Color.MAGENTA`, `Color.ORANGE`, `Color.PINK`, `Color.RED`, `Color.YELLOW`.
@@ -196,11 +197,19 @@ public class Ejecutable {
 - **Label**: Muestra texto estático en la interfaz gráfica.
 - **TextArea**: Representa un área de texto donde los usuarios pueden escribir múltiples líneas.
 - **FileDialog**: Abre un cuadro de diálogo que permite al usuario seleccionar un archivo para abrir o guardar.
+- **Canvas**: Área donde se pueden realizar dibujos personalizados utilizando gráficos. Permite crear gráficos, imágenes o formas dentro de la interfaz gráfica.
 
 #### Menús
 - **MenuBar**: Crea una barra de menús, que puede contener menús como "Archivo", "Editar", etc.
 - **Menu**: Crea un menú dentro de una barra de menús. Los elementos de un menú son de tipo `MenuItem`.
 - **MenuItem**: representa un elemento dentro de un menú. Un `MenuItem` puede ejecutar una acción cuando el usuario lo selecciona.
+
+#### Componentes de Entrada de Datos
+- **TextField**: Campo de texto de una sola línea donde los usuarios pueden escribir. Permite obtener y establecer texto, así como controlar su visibilidad y tamaño.
+- **Choice**: Cuadro de selección desplegable que permite al usuario elegir una opción de una lista de elementos predefinidos.
+- **List**: Lista de opciones donde los usuarios pueden seleccionar elementos.
+Es similar a `Choice` pero permite ver más de una opción a la vez.
+- **Checkbox**: Cuadro de verificación que puede estar marcado o desmarcado. Permite al usuario seleccionar o deseleccionar una opción.
 
 `import java.io.`
 
@@ -248,45 +257,426 @@ public void inicializar() {
 }
 ```
 
+#### Método setup()
+
+```java
+public void setup() {
+    setupMenu();
+    Panel principal = new Panel();
+    principal.setLayout(new GridLayout(4, 1));
+    
+    principal.add(new Label("Cambian las características de la ventana", Label.CENTER));
+    Panel panel1 = new Panel();
+    panel1.add(new Button("Título"));
+    panel1.add(new Button("MenuBar"));
+    panel1.add(new Button("Resizable"));
+    principal.add(panel1);
+    
+    principal.add(new Label("Salidas en la ventana", Label.CENTER));
+    Panel panel2 = new Panel();
+    panel2.add(new Button("Cursor"));
+    panel2.add(new Button("Background"));
+    panel2.add(new Button("Foreground"));
+    panel2.add(new Button("Font"));
+    principal.add(panel2);
+    
+    this.add("South", principal);
+
+    /* indicamos donde se tiene que abrir el cuadro de diálogo, el texto que 
+    queremos poner y el tipo de plantilla que queremos para el cuadro */
+    abrirFichero = new FileDialog(this, "Abrir Fichero", FileDialog.LOAD); 
+    guardarFichero = new FileDialog(this, "Guardar Fichero", FileDialog.SAVE); 
+}
+```
+
+```java
+public void setup() {
+    Panel principal = new Panel();
+    principal.setLayout(new GridLayout(3, 3));
+    Panel paneles[][] = new Panel[3][3];
+    for(int i=0; i<3; i++)
+        for(int j=0; j<3; j++) {
+            paneles[i][j] = new Panel();
+            paneles[i][j].setLayout(new FlowLayout(FlowLayout.LEFT));
+        }
+    paneles[0][0].add(new Label("Campo de texto:"));
+    paneles[0][0].add(new MiTextField("", 15)); // espera recibir el texto (puedes dejarlo vacío) y la anchura (según la función creada abajo)
+    
+    textArea = new TextArea(5, 10);
+    textArea.setBackground(Color.YELLOW);
+    paneles[0][1].add(textArea);
+    
+    paneles[0][2].add(new MiBoton("Borrar", textArea)); // espera recibir el texto que va a tener el botón y el textArea (según la función creada abajo)
+    
+    String opciones[] = {"Sí", "No", "Quizás"};
+    paneles[1][0].add(new MiChoice(opciones, textArea)); // espera recibir un vector de Strings y un TextArea (según la función creada abajo)
+    
+    String deportes[] = {"Atletismo", "Baloncesto", "Tenis", "Esgrima", "Balonmano", "Patinaje"};
+    paneles[1][1].add(new MiLista(deportes, textArea));
+    
+    paneles[1][2].add(new MiCanvas()); // no espera recibir ningún parámetro (según la función creada abajo)
+    
+    String alimentos[] = {"Patatas", "Cebollas", "Tomates", "Lechuga"};
+    paneles[2][0].add(new MiCheckBoxGroup(alimentos));
+    
+    for(int i=0; i<3; i++)
+        for(int j=0; j<3; j++)
+            principal.add(paneles[i][j]);
+    
+    this.add("Center", principal);
+}
+```
+
+```java
+public void setup() {
+    this.add("North", new Label("Elige tu comanda", Label.CENTER));
+    this.chComida = new Choice();
+    for(int i=0; i<comidas.length; i++)
+        chComida.add(comidas[i]);
+    add("West", chComida);
+    
+    listasPlatos = new List[comidas.length];
+    for(int i=0; i<comidas.length; i++) {
+        listasPlatos[i] = new List(5, true);
+        for(int j=0; j<platos[i].length; j++) {
+            listasPlatos[i].add(platos[i][j]);
+        }
+    }
+    
+    presentar = listasPlatos[0];    
+    add("East", presentar);
+    texto = new TextField("", 40);
+    add("South", texto);
+}
+```
+
+#### Método setupMenu()
+
+```java
+porDefecto = new MenuBar();
+        Menu fileMenu = new Menu("File");
+        fileMenu.add(new MenuItem("Exit"));
+        porDefecto.add(fileMenu);
+        this.setMenuBar(porDefecto);
+        alternativo = new MenuBar();
+        Menu archivoMenu = new Menu("Archivo");
+        archivoMenu.add(new MenuItem("Salir"));
+        alternativo.add(archivoMenu);
+```
+
 ### Funciones Gráficas 
 
 - **setColor(Color c)**: Establece el color del objeto Graphics para los siguientes dibujos.
 - **drawOval(int x, int y, int width, int height)**: Dibuja un óvalo solo con el contorno, sin relleno.
 - **fillOval(int x, int y, int width, int height)**: Dibuja un óvalo relleno con el color establecido.
+- **drawString(String texto, int x, int y)**: Dibuja un texto en la ventana en la posición (x, y).
 
-#### Método paint
+### Método handleEvent 
 
-Llama al método dibujar de la clase Ovalo, pasando el objeto Graphics, lo que permite dibujar el óvalo en la ventana.
+Este método maneja diferentes eventos de la interfaz gráfica, como cerrar la ventana, presionar botones, interactuar con menús y listas, entre otros.
+`public boolean handleEvent(Event ev)`.
+
+#### Cerrar la Ventana
+Si el usuario intenta cerrar la ventana, la aplicación se finaliza con `System.exit(0)`.
 
 ```java
-public void paint(Graphics g) {
-    ovalo.dibujar(g);
+if(ev.id == Event.WINDOW_DESTROY) { // Evento de cerrar la ventana
+    System.exit(0);  // Termina la aplicación
+    return true;
 }
 ```
 
-### Método handleEvent
+#### Eventos de Botón
+Maneja los eventos generados por los botones de la interfaz.
 
 ```java
-public boolean handleEvent(Event ev) {
-    if(ev.id == Event.WINDOW_DESTROY) { // Evento de cerrar la ventana
-        System.exit(0);  // Termina la aplicación
-        return true;
-    } else if(ev.id == Event.ACTION_EVENT) {  // Evento de acción (como presionar un botón)
-        if(ev.target instanceof Button) {  // Verifica si el evento proviene de un botón
-            if(ev.arg.equals("Salir")) {  // Si el botón es "Salir"
-                System.exit(0);  // Termina la aplicación
-                return true;
-            } else if(ev.arg.equals("Siguiente")) {  // Si el botón es "Siguiente"
-                ovalo.inicializar();  // Inicializa o restablece el objeto óvalo
-                repaint();  // Redibuja la ventana
-                return true;
-            }
+else if(ev.id == Event.ACTION_EVENT) {  // Evento de acción (botón)
+    if(ev.target instanceof Button) {  // Verifica si el evento proviene de un botón
+        if(ev.arg.equals("Salir")) {  
+            System.exit(0);  // Termina la aplicación
+            return true;
+        } 
+        else if(ev.arg.equals("Siguiente")) {  
+            ovalo.inicializar();  // Reinicia el objeto óvalo
+            repaint();  // Redibuja la ventana
+            return true;
+        }
+        else if(ev.arg.equals("Título")) {  
+            if(this.getTitle().equals(tituloInicial))
+                this.setTitle("Título Alternativo");
+            else
+                this.setTitle(tituloInicial);
+            return true;
+        }
+        else if(ev.arg.equals("MenuBar")) {  
+            if(this.getMenuBar() == porDefecto)
+                this.setMenuBar(alternativo);
+            else
+                this.setMenuBar(porDefecto);
+            return true;
+        }
+        else if(ev.arg.equals("Resizable")) {  
+            this.setResizable(!this.isResizable()); // Alterna entre redimensionable y fijo
+            return true;
+        }
+        else if(ev.arg.equals("Cursor")) {  
+            this.setCursor(cursores[(posCursor++) % cursores.length]); // Cambia el cursor
+            return true;
+        }
+        else if(ev.arg.equals("Background")) {  
+            this.setBackground(colores[(posColor++) % colores.length]); // Cambia el color de fondo
+            return true;
+        }
+        else if(ev.arg.equals("Foreground")) {  
+            this.setForeground(colores[(posColor++) % colores.length]); // Cambia el color del texto
+            return true;
+        }
+        else if(ev.arg.equals("Font")) {  
+            this.setFont(new Font(fuentes[(posLetra++) % fuentes.length], Font.BOLD, 15)); // Cambia la fuente
+            repaint();
+            return true;
         }
     }
-    return false;
 }
 ```
 
+#### Eventos de Menú
+Gestiona acciones dentro de la barra de menú, como abrir, guardar o crear un nuevo archivo.
 
+```java
+else if(ev.id == Event.ACTION_EVENT) {  
+    if(ev.target instanceof MenuItem) {  
+        if(ev.arg.equals("Salir")) {  
+            System.exit(0);
+            return true;
+        }
+        else if(ev.arg.equals("Nuevo")) {  
+            texto.setText(" ");  // Borra el contenido de la caja de texto
+            return true;
+        }
+        else if(ev.arg.equals("Abrir")) {  
+            abrirFichero.setVisible(true);
+            String inFile = abrirFichero.getDirectory() + abrirFichero.getFile();
+            leerFichero(inFile);  // Llama al método que lee el archivo
+            return true;
+        }
+        else if(ev.arg.equals("Guardar")) {  
+            guardarFichero.setVisible(true);
+            String outFile = guardarFichero.getDirectory() + guardarFichero.getFile();
+            guardarFichero(outFile);  // Llama al método que guarda el archivo
+            return true;
+        }
+    }
+}
+```
+
+#### Eventos de Selección (Choice)
+Detecta cuando el usuario cambia una opción en un `Choice` (desplegable) y actualiza la interfaz.
+
+```java
+else if(ev.id == Event.ACTION_EVENT) {  
+    if(ev.target instanceof Choice) {  
+        this.remove(presentar);
+        presentar = listasPlatos[chComida.getSelectedIndex()];  
+        this.add(presentar);
+        this.setVisible(true);
+        texto.setText(chComida.getSelectedItem() + ": ");
+    }
+}
+```
+
+#### Eventos de Lista (List)
+Maneja la selección o deselección de elementos en una `List`, concatenando los elementos seleccionados en una cadena de texto.
+
+```java
+else if((ev.id == Event.LIST_SELECT) || (ev.id == Event.LIST_DESELECT)) {  
+    String frase = chComida.getSelectedItem() + ": ";
+    String elecciones[] = presentar.getSelectedItems();
+    for(int i=0; i<elecciones.length; i++)
+        frase = frase.concat(" ").concat(elecciones[i]);
+    texto.setText(frase);
+}
+```
+
+#### Caso por Defecto
+Si el evento no es manejado por los casos anteriores, el método devuelve `false`.
+
+```java
+return false;
+```
+
+#### Método leerFichero()
+
+```java
+private void leerFichero(String inFile) {
+    DataInputStream inStream;
+    try {
+        inStream = new DataInputStream(new FileInputStream(inFile));
+        String nuevo_texto = "";
+        String linea;
+        while((linea = inStream.readLine()) != null)
+            nuevo_texto += linea + "\n";
+        texto.setText(nuevo_texto);
+    }
+    catch (FileNotFoundException e) {}
+    catch(IOException e) {}
+}
+```
+
+#### Método guardarFichero()
+
+```java
+private void guardarFichero(String outFile) {
+    DataOutputStream outStream;
+    try {
+        outStream = new DataOutputStream(new FileOutputStream(outFile));
+        outStream.writeBytes(texto.getText());
+    }
+    catch (FileNotFoundException e) {}
+    catch(IOException e) {}
+}
+```
+
+#### Class TextField
+
+```java
+class MiTextField extends TextField {
+    public MiTextField(String string, int i) {
+        super(string, i);
+    }
+    public boolean action(Event ev, Object obj) {
+        String texto = this.getText();
+        this.setText(texto.toUpperCase()); // transforma el texto a mayúsculas
+        return true;
+    }
+}
+```
+
+#### Class Button
+
+```java
+class MiBoton extends Button {
+    private final TextArea textoAreaB;
+    public MiBoton(String texto, TextArea textoAreaB) {
+        super(texto);
+        this.textoAreaB = textoAreaB;
+        
+    }
+    public boolean action(Event ev, Object obj) {
+        textoAreaB.setText(" ");
+        return true;
+    }
+}
+```
+
+#### Class Choice
+
+```java
+class MiChoice extends Choice {
+    private final TextArea textoAreaB;
+    public MiChoice(String opciones[], TextArea texto2) {
+        super();
+        for(int i=0; i<opciones.length; i++)
+            this.add(opciones[i]);
+        textoAreaB = texto2;
+    }
+    public boolean action(Event ev, Object obj) {
+        textoAreaB.setText(this.getSelectedItem());
+        return true;
+    }
+}
+```
+
+#### Class List
+
+```java
+class MiLista extends List {
+    private final TextArea textoAreaC;
+    public MiLista(String deportes[], TextArea textoAreaC) {
+        super(5, true); // 5 porque queremos mostrar 5 elementos de la lista
+        this.textoAreaC = textoAreaC;
+        for(int i=0; i<deportes.length; i++)
+            this.add(deportes[i]);
+    }
+    public boolean handleEvent(Event ev) {
+        if(ev.id == Event.ACTION_EVENT) {
+            this.textoAreaC.setText("Doble Click");
+            return true;
+        }
+        else if(ev.id == Event.LIST_SELECT) {
+            this.textoAreaC.setText("Selecciono un elemento");
+            String elementos[] = this.getSelectedItems();
+            String texto = "";
+            for(int i=0; i<elementos.length; i++)
+                texto += elementos[i] + "\n";
+            this.textoAreaC.setText(texto);
+            return true;
+        }
+        else if(ev.id == Event.LIST_DESELECT) {
+            this.textoAreaC.setText("Deselecciono un elemento");
+            return true;
+        }
+        return false;
+    }
+}
+```
+
+#### Class Canvas
+
+```java
+class MiCanvas extends Canvas {
+    int posx = 20;
+    int posy = 20;
+    public MiCanvas() {
+        super();
+        this.setSize(75, 75);
+        this.setBackground(Color.YELLOW);
+        this.setForeground(Color.RED);
+        this.setVisible(true);
+    }
+    
+    public void paint(Graphics g) {
+        g.fillRect(posx, posy, 5, 5); // declaramos un rectángulo
+    }
+    
+    public boolean mouseDown(Event ev, int x, int y) {
+        posx = x;
+        posy = y;
+        repaint();
+        return true;
+    }
+}
+```
+
+#### Class Panel
+
+```java
+class MiCheckBoxGroup extends Panel {
+    Checkbox checkBoxes[];
+    TextField resultado;
+
+    public MiCheckBoxGroup(String elementos[]) {
+        super();
+        this.setLayout(new GridLayout(elementos.length + 1, 1)); // se pondrán los elementos unos debajo de otros
+        checkBoxes = new Checkbox[elementos.length];
+        for(int i=0; i<elementos.length; i++) {
+            checkBoxes[i] = new Checkbox(elementos[i]);
+            this.add(checkBoxes[i]);
+        }
+        
+        resultado = new TextField("", 15);
+        this.add(resultado);
+    }
+    
+    public boolean action(Event ev, Object obj) {
+        String mostrar = "";
+        for(int i=0; i<checkBoxes.length; i++)
+            if(checkBoxes[i].getState())
+                mostrar += checkBoxes[i].getLabel() + " ";
+        resultado.setText(mostrar);
+        return false;
+    }
+}
+```
 
 ---
