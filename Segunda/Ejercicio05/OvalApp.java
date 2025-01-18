@@ -56,15 +56,3 @@ public class OvalApp extends Frame{
         return false;
     }
 }
-
-/*
- Frame ->
- Event -> event
- Layout -> clase de distribución
- Button ->
- Graphics -> clase para dibujar formas
- Color -> clase que espera recibir 3 parámetros entre 0 y 255
-
- Frame tiene por defecto la distribución BorderLayout: norte, sur, este, oeste y centro.
- LinearLayout -> pone los elementos en línea.
-*/
