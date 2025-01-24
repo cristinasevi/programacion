@@ -64,6 +64,21 @@ public class Perro extends Animal {
 public final double PI = 3.14159; // Constante
 ```
 
+#### Math.abs()
+
+Es un método de la clase `Math` que devuelve el valor absoluto de un número. Es decir, convierte cualquier valor negativo en su equivalente positivo.
+
+**Sintaxis**:
+```java
+int resultado = Math.abs(valor);
+```
+**Ejemplo**:
+```java
+int anchura, altura;
+anchura = Math.abs(finX - inicioX);
+altura = Math.abs(finY - inicioY);
+```
+
 ### Herencia
 
 - **`extends`**: Permite que una clase amplíe otra clase, heredando sus atributos y métodos.
@@ -168,8 +183,11 @@ public class Ejecutable {
 ### Importación de clases
 
 `import java.util.`
-- **Random**: es una clase que contiene métodos para generar números aleatorios.
-  - **`nextInt()`**: método que devuelve un número entero aleatorio.
+
+- **Random**: Clase que contiene métodos para generar números aleatorios.
+  - **`nextInt()`**: Método que devuelve un número entero aleatorio.
+- **List**: Interfaz que representa una lista ordenada de elementos.
+- **ArrayList**: Implementación de la interfaz `List` basada en una matriz redimensionable. Permite almacenar elementos de forma dinámica.
 
 `import java.awt.`
 
@@ -353,23 +371,45 @@ public void setup() {
 #### Método setupMenu()
 
 ```java
-porDefecto = new MenuBar();
-        Menu fileMenu = new Menu("File");
-        fileMenu.add(new MenuItem("Exit"));
-        porDefecto.add(fileMenu);
-        this.setMenuBar(porDefecto);
-        alternativo = new MenuBar();
-        Menu archivoMenu = new Menu("Archivo");
-        archivoMenu.add(new MenuItem("Salir"));
-        alternativo.add(archivoMenu);
+public void setupMenuBar(){
+  porDefecto = new MenuBar();
+  Menu fileMenu = new Menu("File");
+  fileMenu.add(new MenuItem("Exit"));
+  porDefecto.add(fileMenu);
+  this.setMenuBar(porDefecto);
+  alternativo = new MenuBar();
+  Menu archivoMenu = new Menu("Archivo");
+  archivoMenu.add(new MenuItem("Salir"));
+  alternativo.add(archivoMenu);
+}
+```
+```java
+public void setupMenuBar(){
+  MenuBar menuBar = new MenuBar();
+  Menu menu1 = new Menu("Fichero");
+  menu1.add(new MenuItem("Nuevo"));
+  menu1.addSeparator();
+  menu1.add(new MenuItem("Salir"));
+  menuBar.add(menu1);
+  Menu menu2 = new Menu("Dibujar");
+  menu2.add(new MenuItem("Línea"));
+  menu2.add(new MenuItem("Óvalo"));
+  menu2.add(new MenuItem("Rectángulo"));
+  menuBar.add(menu2);
+  this.setMenuBar(menuBar);
+}
 ```
 
 ### Funciones Gráficas 
 
-- **setColor(Color c)**: Establece el color del objeto Graphics para los siguientes dibujos.
-- **drawOval(int x, int y, int width, int height)**: Dibuja un óvalo solo con el contorno, sin relleno.
-- **fillOval(int x, int y, int width, int height)**: Dibuja un óvalo relleno con el color establecido.
-- **drawString(String texto, int x, int y)**: Dibuja un texto en la ventana en la posición (x, y).
+- **`setColor(Color c)`**: Establece el color del objeto Graphics para los siguientes dibujos.
+- **`drawOval(int x, int y, int width, int height)`**: Dibuja un óvalo solo con el contorno, sin relleno.
+- **`fillOval(int x, int y, int width, int height)`**: Dibuja un óvalo relleno con el color establecido.
+- **`drawString(String texto, int x, int y)`**: Dibuja un texto en la ventana en la posición (x, y).
+- **`drawLine(int x1, int y1, int x2, int y2)`**: Dibuja una línea desde el punto (x1, y1) hasta (x2, y2).
+- **`drawRect(int x, int y, int width, int height)`**: Dibuja un rectángulo solo con el contorno, sin relleno.
+- **`fillRect(int x, int y, int width, int height)`**: Dibuja un rectángulo relleno con el color establecido.
+- **`drawImage(Image img, int x, int y, ImageObserver observer)`**: Dibuja una imagen en la posición (x, y).
 
 ### Método handleEvent 
 
@@ -495,6 +535,30 @@ else if((ev.id == Event.LIST_SELECT) || (ev.id == Event.LIST_DESELECT)) {
     for(int i=0; i<elecciones.length; i++)
         frase = frase.concat(" ").concat(elecciones[i]);
     texto.setText(frase);
+}
+```
+
+#### Eventos de Dibujo
+Maneja la selección de diferentes herramientas de dibujo en el lienzo.
+
+```java
+else if(ev.arg.equals("Línea")) {
+    canvas.setTipo(DosPuntos.LINEA);
+    return true;
+}
+else if(ev.arg.equals("Óvalo")) {
+    canvas.setTipo(DosPuntos.OVALO);
+    return true;
+}
+else if(ev.arg.equals("Rectángulo")) {
+    canvas.setTipo(DosPuntos.RECTANGULO);
+    return true;
+}
+else if(ev.arg.equals("Nuevo")) {
+    //canvas.getGraphics().clearRect(0, 0, 400, 400);
+    canvas.getLista().clear();
+    canvas.repaint();
+    return true;
 }
 ```
 
