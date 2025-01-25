@@ -8,7 +8,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 
-public class Mondrian extends Applet implements Runnable {
+public class Mondrian2 extends Applet implements Runnable {
     public static final int ARRIBA = 0;
     public static final int ABAJO = 1;
     public static final int IZQUIERDA = 2;
