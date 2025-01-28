@@ -32,7 +32,7 @@ public class Rectangulo {
         g.fillRect(posX, posY, anchura, altura);
     }
     
-    private void update() {
+    public void update() {
         switch (direccion) {
             case ARRIBA:
                 posY--;
