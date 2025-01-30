@@ -24,10 +24,15 @@ public class Pelota extends Rectangle {
     
     public void paint(Graphics g) {
         g.setColor(color);
-        g.fillOval(velX, velY, width, height); 
+        g.fillOval(x, y, width, height); 
     }
     
-    public void actualizar() {
-        
+    public void update() {
+        x += velX;
+        y += velY;               
+        if((x <=0) || (x >= (300-width)))
+            velX = -velX;
+        if((y <= 0) || (y >= (300-height)))
+            velY = -velY;       
     }
 }
