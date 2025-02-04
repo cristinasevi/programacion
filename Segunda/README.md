@@ -182,6 +182,10 @@ public class Ejecutable {
 
 ### Importación de clases
 
+`import java.applet.`
+
+- **Applet**: Clase base para crear un applet, que es una aplicación gráfica que se ejecuta dentro de un navegador.
+
 `import java.util.`
 
 - **Random**: Clase que contiene métodos para generar números aleatorios.
@@ -216,6 +220,8 @@ public class Ejecutable {
 - **TextArea**: Representa un área de texto donde los usuarios pueden escribir múltiples líneas.
 - **FileDialog**: Abre un cuadro de diálogo que permite al usuario seleccionar un archivo para abrir o guardar.
 - **Canvas**: Área donde se pueden realizar dibujos personalizados utilizando gráficos. Permite crear gráficos, imágenes o formas dentro de la interfaz gráfica.
+- **Image**: Representa una imagen. Puedes cargar imágenes desde archivos y manipularlas en aplicaciones gráficas.
+- **Rectangle**: Representa y maneja rectángulos en coordenadas bidimensionales (X, Y) con un ancho (width) y una altura (height).
 
 #### Menús
 - **MenuBar**: Crea una barra de menús, que puede contener menús como "Archivo", "Editar", etc.
@@ -410,6 +416,7 @@ public void setupMenuBar(){
 - **`drawRect(int x, int y, int width, int height)`**: Dibuja un rectángulo solo con el contorno, sin relleno.
 - **`fillRect(int x, int y, int width, int height)`**: Dibuja un rectángulo relleno con el color establecido.
 - **`drawImage(Image img, int x, int y, ImageObserver observer)`**: Dibuja una imagen en la posición (x, y).
+- **`createImage(int width, int height)`**: Crea una imagen vacía en memoria con las dimensiones especificadas, que luego puede ser manipulada y pintada con Graphics.
 
 ### Método handleEvent 
 
@@ -601,6 +608,36 @@ private void guardarFichero(String outFile) {
 }
 ```
 
+#### Método mouseDown() 
+
+```java
+public boolean mouseDown(Event ev, int x, int y) {
+    actual = new DosPuntos(x, y, tipo);
+    return true;
+}
+```
+
+#### Método mouseDrag()
+
+```java
+public boolean mouseDrag(Event ev, int x, int y) {
+    actual.finX = x;
+    actual.finY = y;
+    repaint();
+    return true;
+}
+```
+
+#### Método mouseUp()
+
+```java
+public boolean mouseUp(Event ev, int x, int y) {
+    lista.add(actual);
+    actual = null; 
+    return true;
+}
+```
+
 #### Class TextField
 
 ```java
@@ -743,4 +780,107 @@ class MiCheckBoxGroup extends Panel {
 }
 ```
 
+### Colección `List<>` y `ArrayList<>`
+
+`List<>`: Interfaz que representa una colección ordenada de elementos, donde se puede acceder a los elementos mediante su índice. Permite duplicados y es ideal para almacenar listas de objetos.
+
+`ArrayList<>`: Es una implementación de la interfaz List que representa una colección dinámica de elementos, donde se puede acceder a los elementos mediante su índice. Es ideal para almacenar listas de objetos y permite que el tamaño de la lista se ajuste automáticamente según sea necesario.
+
+- `private List<Nombre_Clase> lista`: Declara una lista de objetos de tipo Nombre_Clase, donde cada objeto representa un punto con coordenadas (x, y). Esta lista almacenará todos los atributos que se agreguen a la clase.
+- `public List<Nombre_Clase> getLista()`: Método getter que devuelve la lista actual de objetos Nombre_Clase. Permite acceder a la lista almacenados desde fuera de la clase.
+- `public void setLista(List<Nombre_Clase> lista)`: Método setter que permite modificar la lista de objetos Nombre_Clase. Se puede usar para asignar una nueva lista de atributos.
+
+#### Métodos de List
+
+- `.size()`: Devuelve el número de elementos que contiene la lista.
+- `.get(i)`: Devuelve el elemento que se encuentra en el índice i de la lista. La indexación comienza desde 0.
+
+### Interfaz `implements Runnable`
+
+`Runnable`: Interfaz funcional que permite definir código que puede ser ejecutado en un hilo separado.
+
+**Método `run()`**
+
+Contiene el código que será ejecutado cuando se inicie el hilo.
+```java
+public class MiTarea implements Runnable {
+    Thread animacion;
+    String frames[] = {"*", "**", "***", "****", "*****", "******", "*****", "****", "***", "**", "*"};
+    int actual = 0;
+
+    public static void main(String[] args) {
+        MiTarea tarea = new MiTarea();
+        animacion = new Thread(this);
+        animacion.start();
+    }
+
+    public void run() {
+        do {
+            actual = (actual + 1) % frames.length;
+            repaint();
+            try {
+                Thread.sleep(300); // milisegundos que el proceso va a dormir
+            } catch (InterruptedException e) {}
+        }
+        while(true);     
+    }
+}
+```
+
+### Métodos en el Applet
+
+#### init()
+Se llama cuando se carga el applet por primera vez. Es donde se inicializan los valores y recursos necesarios.
+```java
+public void init() {
+    posX = 80;
+    posY = 100;
+    imagen = this.createImage(300, 300);
+    noseve = imagen.getGraphics();
+    direccion = DERECHA;
+}
+```
+
+#### start()
+Se llama después de `init()` o cada vez que el applet se vuelve visible o se reanuda. Se utiliza para iniciar los hilos o tareas en segundo plano.
+```java
+public void start() {
+    animacion = new Thread(this); 
+    animacion.start();
+}
+```
+
+#### paint(Graphics g)()
+Se llama cada vez que el applet necesita ser redibujado, como cuando la ventana es redimensionada o vuelve a aparecer después de estar oculta.
+```java
+public void paint(Graphics g) {
+    // g.fillRect(posX, posY, anchura, altura);
+    noseve.setColor(Color.black);
+    noseve.fillRect(0, 0, 300, 300);
+}
+```
+
+#### stop()
+Se llama cuando el applet deja de ser visible o es suspendido, por ejemplo, si el usuario navega fuera de la página que contiene el applet.
+
+#### update()
+```java
+public void update(Graphics g) {
+    paint(g);
+}
+```
+
+#### run()
+```java
+public void run() {
+    do {
+        actualizar();
+        repaint();
+        try {
+            Thread.sleep(20); 
+        } catch (InterruptedException e) {}
+    }
+    while(true); 
+}
+```
 ---
