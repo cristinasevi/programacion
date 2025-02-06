@@ -21,6 +21,7 @@ public class Arkanoid extends Applet implements Runnable {
     ArrayList<Ladrillo> ladrillos;
     Raqueta raqueta;
     Pelota pelota;
+    boolean continua = true;
     
     public void init() {
         Color colores[] = {Color.CYAN, Color.YELLOW, Color.ORANGE, Color.GREEN, Color.RED};
@@ -53,12 +54,17 @@ public class Arkanoid extends Applet implements Runnable {
             ladrillos.get(i).paint(noseve);
         raqueta.paint(noseve);
         pelota.paint(noseve);
+        if(!continua) noseve.drawString("GAME OVER", 120, 140); // cuando sea falso !
         g.drawImage(imagen, 0, 0, this);
     }
 
     public void run() {
         do {
-            pelota.update(raqueta, ladrillos);
+            continua = pelota.update(raqueta, ladrillos); 
+            if(!continua) {
+                repaint();
+                animacion.stop(); // tienes q poner el nombre q has asignado al Thread
+            } 
             repaint();
             try {
                 Thread.sleep(15); 

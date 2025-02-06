@@ -22,32 +22,37 @@ public class Pelota extends Rectangle {
         g.fillOval(x, y, width, height);
     }
     
-    public void update(Raqueta raqueta, ArrayList<Ladrillo> ladrillos) {
+    public boolean update(Raqueta raqueta, ArrayList<Ladrillo> ladrillos) {
         x += velX;
         y += velY;               
         if((x <=0) || (x >= (300-width)))
             velX = -velX;
-        if((y <= 0) || (y >= (300-height)))
+        if(y <=0)
             velY = -velY;  
+        if(y >= (300-height))
+            return false;
         
         if(this.intersects(raqueta))
             velY = -velY;
         
+        /*
         for(int i=0; i<ladrillos.size(); i++) {
             if(this.intersects(ladrillos.get(i))) {
                 ladrillos.remove(i);
                 this.velY = -this.velY;
-                break; // se pone break para que no se eliminen varios de golpe al chocar
+                break; 
             }
         }
+        */
         
-        // Otra forma para hacer la función anterior -> for(Clase elemento_individual : lista)
+        // FOREACH -> Otra forma para hacer la función anterior -> for(Clase elemento_individual : lista)
         for(Ladrillo ladrillo : ladrillos) {
             if(this.intersects(ladrillo)) {
                 ladrillos.remove(ladrillo);
                 this.velY = -this.velY;
-                break; 
+                break; // se pone break para que no se eliminen varios de golpe al chocar
             }
         }
+        return true;
     }
 }
