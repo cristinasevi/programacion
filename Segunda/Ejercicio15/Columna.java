@@ -3,23 +3,31 @@
  */
 package Segunda.Ejercicio15;
 
+import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.Graphics;
 
 public class Columna {
+    public static final int HUECO = 80;
     public static final int ANCHURA = 30;
-    public static final int SEPARACION = 75;
-    public static final int TIEMPO = 10;
-    
+    public static final int POSINICIAL = 270;
+    public static final int VELX = -1;
     Rectangle rect1, rect2;
     
     public Columna() {
-        int altura = ((int)(Math.random()*105)+20);
-        this.rect1 = new Rectangle(270, 0, ANCHURA, altura);
-        this.rect2 = new Rectangle(270, SEPARACION, ANCHURA, altura);
+        int altura = (int)(Math.random()*130)+20; // entre 20 y 150
+        rect1 = new Rectangle(POSINICIAL, 0, ANCHURA, altura);
+        rect2 = new Rectangle(POSINICIAL, altura+HUECO, ANCHURA, 300-(altura+HUECO));
     }
     
     public void paint(Graphics g) {
-        
+        g.setColor(Color.green);
+        g.fillRect(rect1.x, rect1.y, rect1.width, rect1.height);
+        g.fillRect(rect2.x, rect2.y, rect2.width, rect2.height);
+    }
+    
+    public void update() {
+        rect1.x += VELX;
+        rect2.x += VELX;
     }
 }
