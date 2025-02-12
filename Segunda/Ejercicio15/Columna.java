@@ -10,12 +10,12 @@ import java.awt.Graphics;
 public class Columna {
     public static final int HUECO = 80;
     public static final int ANCHURA = 30;
-    public static final int POSINICIAL = 270;
+    public static final int POSINICIAL = 300;
     public static final int VELX = -1;
     Rectangle rect1, rect2;
     
     public Columna() {
-        int altura = (int)(Math.random()*130)+20; // entre 20 y 150
+        int altura = (int)(Math.random()*170)+20; // entre 20 y 190
         rect1 = new Rectangle(POSINICIAL, 0, ANCHURA, altura);
         rect2 = new Rectangle(POSINICIAL, altura+HUECO, ANCHURA, 300-(altura+HUECO));
     }

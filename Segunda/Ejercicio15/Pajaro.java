@@ -27,4 +27,8 @@ public class Pajaro extends Rectangle {
     public void saltar() {
         y += SALTO; 
     }
+    
+    public boolean chocar(Rectangle rect1, Rectangle rect2) {
+        return this.intersects(rect1) || this.intersects(rect2);
+    }
 }
