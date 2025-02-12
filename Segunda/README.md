@@ -79,6 +79,30 @@ anchura = Math.abs(finX - inicioX);
 altura = Math.abs(finY - inicioY);
 ```
 
+#### Math.random()
+
+Es un método de la clase `Math` que devuelve un número decimal aleatorio entre 0.0 y 1 pero sin incluir el 1. Para obtener valores en un rango específico, se debe multiplicar el resultado y convertirlo a entero si es necesario.
+
+**Sintaxis**:
+```java
+int resultado = ((int)(Math.random());
+```
+**Ejemplo**:
+```java
+int radio = ((int)(Math.random()*30)+20); // valor entre 20 y 50 sin incluir 50
+```
+
+#### Parsear
+
+Parsear es el proceso de convertir un dato de un tipo a otro.
+
+**Ejemplos**:
+```java
+int radio = ((int)(Math.random()*30)+20); // Se convierte el dato de float a int
+int numero = Integer.parseInt("123"); // Convierte una cadena en un entero
+float decimal = Float.parseFloat("3.14"); // Convierte una cadena en un número decimal
+```
+
 ### Herencia
 
 - **`extends`**: Permite que una clase amplíe otra clase, heredando sus atributos y métodos.
@@ -616,6 +640,15 @@ public boolean mouseDown(Event ev, int x, int y) {
     return true;
 }
 ```
+```java
+public boolean mouseDown(Event e, int x, int y) {
+    for(int i=0; i<pelotas.size(); i++) {
+        if(pelotas.get(i).contains(x, y))
+            pelotas.remove(i);
+    }
+    return true;
+} 
+```
 
 #### Método mouseDrag()
 
@@ -634,6 +667,20 @@ public boolean mouseDrag(Event ev, int x, int y) {
 public boolean mouseUp(Event ev, int x, int y) {
     lista.add(actual);
     actual = null; 
+    return true;
+}
+```
+
+#### Método keyDown()
+
+```java
+public boolean keyDown(Event e, int tecla) {
+    if(tecla == 1006) // tecla 1006 -> flecha izquierda
+        raqueta.setX(IZQUIERDA);
+    if(tecla == 1007) // tecla 1007 -> flecha derecha
+        raqueta.setX(DERECHA);
+    if(tecla == 32) // tecla 32 -> espacio
+        pajaro.saltar();
     return true;
 }
 ```
@@ -790,10 +837,16 @@ class MiCheckBoxGroup extends Panel {
 - `public List<Nombre_Clase> getLista()`: Método getter que devuelve la lista actual de objetos Nombre_Clase. Permite acceder a la lista almacenados desde fuera de la clase.
 - `public void setLista(List<Nombre_Clase> lista)`: Método setter que permite modificar la lista de objetos Nombre_Clase. Se puede usar para asignar una nueva lista de atributos.
 
-#### Métodos de List
+### Métodos de List
 
 - `.size()`: Devuelve el número de elementos que contiene la lista.
 - `.get(i)`: Devuelve el elemento que se encuentra en el índice i de la lista. La indexación comienza desde 0.
+- `.remove(i)`: Elimina el elemento que se encuentra en el índice i de la lista.
+
+### Métodos de Rectangle
+
+- `.contains(x, y)`: Comprueba si el punto con coordenadas (x, y) está dentro del área definida por el rectángulo.
+- `.intersects(Rectangle r)`: Comprueba si el Rectangle actual se superpone con otro Rectangle pasado como argumento.
 
 ### Interfaz `implements Runnable`
 
@@ -862,6 +915,9 @@ public void paint(Graphics g) {
 
 #### stop()
 Se llama cuando el applet deja de ser visible o es suspendido, por ejemplo, si el usuario navega fuera de la página que contiene el applet.
+```java
+animacion.stop();
+```
 
 #### update()
 ```java
@@ -883,4 +939,10 @@ public void run() {
     while(true); 
 }
 ```
+
+### Foreach
+
+
+
+
 ---
