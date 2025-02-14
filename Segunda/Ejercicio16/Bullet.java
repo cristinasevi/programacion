@@ -9,12 +9,10 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class Bullet extends Rectangle {
-    int velX, velY;
+    public static final int VELY = -5;
             
-    public Bullet() {
-        super(150, 200, 9, 9); 
-        velX = -3;
-        velY = -2;
+    public Bullet(int posX) {
+        super(posX, 260, 5, 10); // 260 -> 300 - altura de pistola
     }
     
     public void paint(Graphics g) {

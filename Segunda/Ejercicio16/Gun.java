@@ -11,7 +11,7 @@ public class Gun extends Rectangle {
     public static final int VELX = 5;
     
     public Gun() {
-        super(120, 270, 20, 30); 
+        super(130, 260, 40, 40); 
     }  
     
     public void paint(Graphics g) {
@@ -19,14 +19,9 @@ public class Gun extends Rectangle {
         g.fillRect(x, y, width, height);
     }
 
-    public void setX(int direccion) {
-        if(direccion == Marcianos.DERECHA)
-            x += VELX;
-        else
-            x -= VELX;
-        if(x < 0)
-            x = 0;
-        if(x > 240) 
-            x = 240;
+    public void actualizar(int posX) {
+        x = posX - (width/2); // para que se ponga en medio
+        if(x >= (300-width)) x = 300-width;
+        if(x <= 0) x = 0;
     }
 }
