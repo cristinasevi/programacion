@@ -28,6 +28,9 @@ public class Marcianos extends Applet implements Runnable {
         pistola = new Gun();
         balas = new ArrayList<Bullet>();
         this.setSize(300, 300);
+        
+        for(int i=0; i<10; i++) 
+            naves.add(new Nave());
     }
     
     public void update(Graphics g) {
@@ -42,11 +45,11 @@ public class Marcianos extends Applet implements Runnable {
     public void paint(Graphics g) {
         noseve.setColor(Color.BLACK);
         noseve.fillRect(0, 0, 300, 300);
-        for(int i=0; i<naves.size(); i++)
-            naves.get(i).paint(noseve);
+        for(Nave nave : naves)
+            nave.paint(noseve);
         pistola.paint(noseve);
-        for(int i=0; i<balas.size(); i++)
-            balas.get(i).paint(noseve);
+        for(Bullet bala : balas)
+            bala.paint(noseve);
         if(!continua) noseve.drawString("GAME OVER", 120, 140); 
         g.drawImage(imagen, 0, 0, this);
     }
@@ -54,12 +57,22 @@ public class Marcianos extends Applet implements Runnable {
     public void run() {
         do {
             contador += TIEMPO;
+            for(Bullet bala : balas) 
+                if(bala.update()) {
+                    balas.remove(bala);
+                    break;
+                }
+            
+            if (contador >= 5000) {
+                naves.add(new Nave());
+                contador = 0;
+            }
             
             if(!continua) {
                 repaint();
                 animacion.stop();
             } 
-            //repaint();
+            repaint();
             try {
                 Thread.sleep(15); 
             } catch (InterruptedException e) {}
@@ -69,7 +82,12 @@ public class Marcianos extends Applet implements Runnable {
     
     public boolean mouseMove(Event e, int x, int y) {
         pistola.actualizar(x);
-        repaint();
+        //repaint();
+        return true;
+    }
+    
+    public boolean mouseDown(Event e, int x, int y) {
+        balas.add(new Bullet(x));
         return true;
     }
 }

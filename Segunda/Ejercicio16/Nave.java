@@ -8,17 +8,24 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Nave extends Rectangle {
-    public static final int ANCHURA = 28;
-    public static final int ALTURA = 10;
-    public Color color;
+    static final Color colores[] = {Color.BLUE, Color.CYAN, Color.GRAY, Color.MAGENTA, Color.ORANGE};
+    Color color;
+    int velX;
 
-    public Nave(int posX, int posY, Color color) {
-        super(posX, posY, ANCHURA, ALTURA);
-        this.color = color;
+    public Nave() {
+        super((int)(Math.random()*250), (int)(Math.random()*100), 40, 15);
+        color = colores[(int)(Math.random()*colores.length)];
+        velX = (int)(Math.random()*5) + 1;
     }
 
     public void paint(Graphics g) {
-        g.setColor(this.color);
+        g.setColor(color);
         g.fillRect(x, y, width, height);
+    }
+    
+    public void update() {
+        x += velX;
+        if((x <= 0) || (x>=300-width))
+            velX = -velX;
     }
 }
