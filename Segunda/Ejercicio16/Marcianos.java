@@ -24,13 +24,13 @@ public class Marcianos extends Applet implements Runnable {
     public void init() {
         imagen = this.createImage(300, 300);
         noseve = imagen.getGraphics();
-        naves = new ArrayList<Nave>();
         pistola = new Gun();
         balas = new ArrayList<Bullet>();
-        this.setSize(300, 300);
-        
+        naves = new ArrayList<Nave>();
         for(int i=0; i<10; i++) 
             naves.add(new Nave());
+        
+        this.setSize(300, 300);
     }
     
     public void update(Graphics g) {
@@ -45,11 +45,11 @@ public class Marcianos extends Applet implements Runnable {
     public void paint(Graphics g) {
         noseve.setColor(Color.BLACK);
         noseve.fillRect(0, 0, 300, 300);
-        for(Nave nave : naves)
-            nave.paint(noseve);
         pistola.paint(noseve);
         for(Bullet bala : balas)
             bala.paint(noseve);
+        for(Nave nave : naves)
+            nave.paint(noseve);
         if(!continua) noseve.drawString("GAME OVER", 120, 140); 
         g.drawImage(imagen, 0, 0, this);
     }
@@ -57,15 +57,33 @@ public class Marcianos extends Applet implements Runnable {
     public void run() {
         do {
             contador += TIEMPO;
-            for(Bullet bala : balas) 
+            for(Bullet bala : balas) {
                 if(bala.update()) {
                     balas.remove(bala);
                     break;
                 }
+            }
             
-            if (contador >= 5000) {
+            for(Nave nave : naves) 
+                nave.update(); // para que se muevan las naves
+            
+            if (contador >= 3000) {
                 naves.add(new Nave());
                 contador = 0;
+            }
+            
+            boolean salir = false;
+            for(Bullet bala : balas) {
+                for(Nave nave : naves)
+                    if(bala.intersects(nave)) {
+                        naves.remove(nave);
+                        salir = true;
+                        break;
+                    }
+                if(salir) {
+                    balas.remove(bala);
+                    break;
+                }
             }
             
             if(!continua) {
