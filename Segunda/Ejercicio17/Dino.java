@@ -29,7 +29,7 @@ public class Dino extends Rectangle {
         g.fillRect(x, y, width, height);
     }
     
-    public void actualizar() {
+    public boolean actualizar(Cactus cact) {
         if(salto) {
             y += velY;
             if(y <= TOPE) 
@@ -39,5 +39,6 @@ public class Dino extends Rectangle {
                 setSalto(false);
             }
         }
+        return this.intersects(cact);
     }
 }
