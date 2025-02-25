@@ -9,6 +9,7 @@ import java.awt.Event;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 public class RanaApp extends Applet implements Runnable {
     public static final int TIEMPO = 35;
@@ -19,7 +20,7 @@ public class RanaApp extends Applet implements Runnable {
     Rana rana;
     ArrayList<Coche> coches;
     
-    boolean continua = true;
+    public static boolean continua = true;
     int contador = 0;
     int tiempoAleatorio;
     
@@ -27,11 +28,22 @@ public class RanaApp extends Applet implements Runnable {
         imagen = this.createImage(500, 300);
         noseve = imagen.getGraphics();
         rana = new Rana();
-        coches = new ArrayList<Coche>();
-        coches.add(new Coche());
-        tiempoAleatorio = (int)(Math.random()*2000)+2000;
         
+        coches = new ArrayList<Coche>();
+        coches.add(crearCoche());
+            
+        tiempoAleatorio = (int)(Math.random()*2000)+2000;
         this.setSize(300, 300);
+    }
+
+    public Coche crearCoche() {
+        int velocidad = (int)(Math.random()*3) + 3;
+        if(Math.random() < 0.5) {
+            return new Coche(-40, (int)(Math.random()*80) + 150, velocidad);
+        }
+        else {
+            return new Coche(500, (int)(Math.random()*80) + 50, -velocidad);
+        }
     }
     
     public void update(Graphics g) {
@@ -54,7 +66,7 @@ public class RanaApp extends Applet implements Runnable {
         rana.paint(noseve);
         for(Coche coche : coches) 
             coche.paint(noseve);
-        if(rana.y == 0) noseve.drawString("WINNER", 120, 140); 
+        if(rana.y <= 0) noseve.drawString("WINNER", 120, 140); 
         if(!continua) noseve.drawString("GAME OVER", 120, 140); 
         g.drawImage(imagen, 0, 0, this);
     }
@@ -63,18 +75,30 @@ public class RanaApp extends Applet implements Runnable {
         do {
             contador += TIEMPO;  
             
-            if(contador >= 500) {
-                coches.add(new Coche());
+            if(contador >= tiempoAleatorio) {
                 contador = 0;
+                tiempoAleatorio = (int)(Math.random()*500)+500;
+                coches.add(crearCoche());
             }
             
+            rana.colision(coches);
+            
+            try {
             for(Coche coche : coches)
-                if(coche.update()) {
+                if(coche.update())
                     coches.remove(coche);
+                    //break;
+            } catch(ConcurrentModificationException e) {};
+            
+            /*
+            for(Coche coche : coches)
+                if(rana.intersects(coche)) {
+                    continua = false;
                     break;
                 }
+            */
             
-            if(rana.y==0) {
+            if(rana.y<=0) {
                 repaint();
                 animacion.stop();
             } 

@@ -10,11 +10,12 @@ import java.awt.Rectangle;
 public class Coche extends Rectangle {
     static final Color colores[] = {Color.BLUE, Color.CYAN, Color.GRAY, Color.MAGENTA, Color.ORANGE};
     Color color;
-    int velX = 5;
+    int velX;
 
-    public Coche() {
-        super((int)(Math.random()*100)+50, (int)(Math.random()*250), 40, 15);
+    public Coche(int posX, int posY, int velX) {
+        super(posX, posY, 40, 20);
         color = colores[(int)(Math.random()*colores.length)];
+        this.velX = velX;
     }
     
     public void paint(Graphics g) {
@@ -23,7 +24,9 @@ public class Coche extends Rectangle {
     }
     
     public boolean update() {
-        x -= velX;
-        return(x<-width);
+        x += velX;
+        if((x < -width) || (x>300))
+            return true;
+        return false;
     }
 }

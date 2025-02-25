@@ -6,6 +6,7 @@ package Segunda.Ejercicio18;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 public class Rana extends Rectangle {
     public static final int VEL = 3;
@@ -38,5 +39,11 @@ public class Rana extends Rectangle {
                 x += VEL;
                 break;
         }
+    }
+    
+    public void colision(ArrayList<Coche> coches) {
+        for(Coche coche : coches)
+            if(coche.intersects(this))
+                RanaApp.continua = false;
     }
 }
