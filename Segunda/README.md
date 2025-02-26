@@ -216,6 +216,7 @@ public class Ejecutable {
   - **`nextInt()`**: Método que devuelve un número entero aleatorio.
 - **List**: Interfaz que representa una lista ordenada de elementos.
 - **ArrayList**: Implementación de la interfaz `List` basada en una matriz redimensionable. Permite almacenar elementos de forma dinámica.
+- **ConcurrentModificationException**: Excepción que se lanza cuando se detecta una modificación concurrente en una colección mientras se itera sobre ella con un iterador no seguro.
 
 `import java.awt.`
 
@@ -649,6 +650,21 @@ public boolean mouseDown(Event e, int x, int y) {
     return true;
 } 
 ```
+```java
+public boolean mouseDown(Event e, int x, int y) {
+    balas.add(new Bullet(x));
+    return true;
+}
+```
+
+#### Método mouseMove()
+
+```java
+public boolean mouseMove(Event e, int x, int y) {
+    pistola.actualizar(x);
+    return true;
+}
+```
 
 #### Método mouseDrag()
 
@@ -842,6 +858,7 @@ class MiCheckBoxGroup extends Panel {
 - `.size()`: Devuelve el número de elementos que contiene la lista.
 - `.get(i)`: Devuelve el elemento que se encuentra en el índice i de la lista. La indexación comienza desde 0.
 - `.remove(i)`: Elimina el elemento que se encuentra en el índice i de la lista.
+- `.isEmpty()`: Devuelve `true` si la lista está vacía y `false` en caso contrario.
 
 ### Métodos de Rectangle
 
@@ -891,6 +908,11 @@ public void init() {
     imagen = this.createImage(300, 300);
     noseve = imagen.getGraphics();
     direccion = DERECHA;
+    naves = new ArrayList<Nave>();
+    for(int i=0; i<10; i++)
+    naves.add(new Nave());
+    tiempoAleatorio = (int)(Math.random()*2000)+2000;
+    this.setSize(300, 300);
 }
 ```
 
@@ -910,6 +932,10 @@ public void paint(Graphics g) {
     // g.fillRect(posX, posY, anchura, altura);
     noseve.setColor(Color.black);
     noseve.fillRect(0, 0, 300, 300);
+    for(Nave nave : naves)
+    nave.paint(noseve);
+    if(!continua) noseve.drawString("GAME OVER", 120, 140); 
+    g.drawImage(imagen, 0, 0, this);
 }
 ```
 
@@ -942,7 +968,84 @@ public void run() {
 
 ### Foreach
 
+Es un bucle de forma simplificada para iterar sobre colecciones y arreglos. Su sintaxis es:
+```java
+for (Tipo elemento : colección) {
+    // Operaciones con elemento
+}
+```
+Ejemplo:
+```java
+for(Ladrillo ladrillo : ladrillos) {
+    if(this.intersects(ladrillo)) {
+        ladrillos.remove(ladrillo);
+        this.velY = -this.velY;
+        break;
+    }
+}
 
+for(Columna columna : columnas)
+    columna.paint(noseve);
 
+for(Columna columna : columnas)
+    columna.update();
+```
+
+### Métodos intersects
+```java
+if(this.intersects(raqueta))
+    velY = -velY;
+```
+```java
+for(int i=0; i<ladrillos.size(); i++) {
+    if(this.intersects(ladrillos.get(i))) {
+        ladrillos.remove(i);
+        this.velY = -this.velY;
+        break; 
+    }
+}
+
+for(Ladrillo ladrillo : ladrillos) {
+    if(this.intersects(ladrillo)) {
+        ladrillos.remove(ladrillo);
+        this.velY = -this.velY;
+        break;
+    }
+}
+```
+```java
+public boolean chocar(Rectangle rect1, Rectangle rect2) {
+    return this.intersects(rect1) || this.intersects(rect2);
+}
+
+if(!columnas.isEmpty()) {
+    continua = !pajaro.chocar(columnas.get(0).rect1,columnas.get(0).rect2);
+
+    if(columnas.get(0).rect1.x < -Columna.ANCHURA)
+        columnas.remove(0);
+}
+```
+```java
+return this.intersects(cact);
+```
+```java
+public void colision(ArrayList<Coche> coches) {
+    for(Coche coche : coches)
+        if(coche.intersects(this))
+            RanaApp.continua = false;
+}
+```
+
+### ConcurrentModificationException
+
+Se utiliza para detienerse porque se produce un error al modificar la colección durante la iteración.
+
+```java
+try {
+    for(Coche coche : coches)
+        if(coche.update())
+            coches.remove(coche);
+} catch(ConcurrentModificationException e){}
+```
 
 ---
