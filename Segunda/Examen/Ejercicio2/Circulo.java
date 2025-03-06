@@ -7,40 +7,47 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.List;
 
 public class Circulo extends Rectangle {
-    int velX, velY;
-    Color color;
-    private int numero;
-    Color[] colores = {Color.ORANGE, Color.CYAN, Color.YELLOW, Color.MAGENTA};
-            
-    public Circulo() {
-        super(140, 140, 30, 30);
-        velX = (int)(Math.random()*2)+2;
-        velY = (int)(Math.random()*2)+2;
-        if (Math.random() < 0.5) velX = -velX;
-        if (Math.random() < 0.5) velY = -velY;
-        numero = 1;
+    static final int RADIO = 90;
+    
+    int velX;
+    int velY;
+    int numInterior = 1;
+    Color colores[] = {Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.GRAY, Color.MAGENTA};
+
+    public Circulo(int x, int y){
+        super(x, y, 0, 0);
+        this.setSize(RADIO, RADIO);
+        velX = ((int)(Math.random()*6)) - 3;
+        velY = ((int)(Math.random()*6)) - 3;
+        velX = (velX == 0) ? 1 : velX;
+        velY = (velY == 0) ? 1 : velY;
     }
     
-    public void paint(Graphics g) {
-        g.setColor(Color.YELLOW);
+    public void paint(Graphics g){
+        g.setColor(colores[numInterior]);
         g.fillOval(x, y, width, height);
-        
-        g.setFont(new Font("Arial", Font.BOLD, 16));
-        g.setColor(Color.BLACK);
-        g.drawString("" + numero, x + width/2 - 4, y + height/2 + 5);
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Times New Roman", Font.BOLD, 48));
+        g.drawString("" + numInterior, (x + RADIO/2) - 12, (y + RADIO/2) + 6);
     }
     
-    public boolean update() {
+    public void update(){
+        movimiento();
+    }
+    
+    public void movimiento(){
         x += velX;
         y += velY;
-        
-        return (x + width < 0 || x > 300 || y + height < 0 || y > 300);
     }
     
-    public boolean aumentar() {
-        numero++;
-        return numero >= 5;
+    public void aumentar(List<Circulo> c){
+        this.numInterior += 1;
+        if(numInterior > 5){
+            c.remove(this);
+            App.PUNTUACION++;
+        }
     }
 }

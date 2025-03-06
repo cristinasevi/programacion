@@ -13,90 +13,88 @@ import java.awt.Event;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 
 public class App extends Applet implements Runnable {
-    public static final int TIEMPO = 35;
+    public static final int ANCHURA = 600;
+    public static final int ALTURA = 600;
+    public static int PUNTUACION = 0;
+    boolean gameOver = false;
+    int temporizador = 0;
+    
+    List<Circulo> circulos;
     Thread animacion;
+    Point puntero;
     Image imagen;
     Graphics noseve;
     
-    ArrayList<Circulo> circulos;
-    
-    int sum = 0;
-    boolean continua = true;
-    int contador = 0;
-    int tiempoAleatorio;
-    
-    public void init() {
-        imagen = this.createImage(300, 300);
+    public void init(){
+        imagen = this.createImage(ANCHURA, ALTURA);
         noseve = imagen.getGraphics();
-        
         circulos = new ArrayList<Circulo>();
-        
-        circulos.add(new Circulo());
-       
-        tiempoAleatorio = (int)(Math.random()*2000)+2000;
-        this.setSize(300, 300);
+        generar();
+        this.setSize(ANCHURA, ALTURA);
     }
     
-    public void update(Graphics g) {
-        paint(g);
-    }
-    
-    public void start() {
+    public void start(){
         animacion = new Thread(this);
         animacion.start();
     }
-    
-    public void paint(Graphics g) {
+    public void paint(Graphics g){
+        noseve.setFont(new Font("Times New Roman", Font.BOLD, 48));
         noseve.setColor(Color.BLACK);
-        noseve.fillRect(0, 0, 300, 300);
-       
-        for(Circulo circulo : circulos)
-            circulo.paint(noseve);
-        
-        noseve.setFont(new Font("Arial", Font.BOLD, 16));
+        noseve.fillRect(0, 0, ANCHURA, ALTURA);
+        for(int i = 0; i < circulos.size(); i++){
+            circulos.get(i).paint(noseve);
+        }
         noseve.setColor(Color.WHITE);
-        noseve.drawString("PINCHADOS = " + sum, 100, 30); 
-        
-            
-        if(!continua) noseve.drawString("GAME OVER", 120, 140); 
+        noseve.drawString("PINCHADOS: " + PUNTUACION, ANCHURA/2 - 180, 60);
+        if(gameOver){
+            noseve.drawString("GAME OVER", ANCHURA/2 - 180, ALTURA/2);
+        }
         g.drawImage(imagen, 0, 0, this);
+        
+    }
+    public void update(Graphics g){
+        paint(g);
     }
     
     public void run() {
-        do {
-            contador += TIEMPO;
-            
-            for(Circulo circulo : circulos)
-                circulo.update();
-            
-            if(contador >= 2000) {
-                circulos.add(new Circulo());
-                contador = 0;
+        do{
+            perder();
+            for (int i = 0; i < circulos.size(); i++) {
+                circulos.get(i).update();
             }
-            
-            if(sum >= 10) {
-                continua = false;
+            if(temporizador > 1920){
+                generar();
+                temporizador = 0;
+            }else{
+                temporizador += 16;
             }
-            
-            if(!continua) {
-                repaint();
-                animacion.stop();
-            } 
             repaint();
-            try {
-                Thread.sleep(TIEMPO); 
-            } catch (InterruptedException e) {}
+            try{
+                Thread.sleep(16);
+            } catch (InterruptedException ex){}
+        }while(gameOver == false);
+    }
+    public void generar(){
+        circulos.add(new Circulo(ANCHURA/2 - Circulo.RADIO, ALTURA/2 - Circulo.RADIO));
+    }
+    public void perder(){
+        if(circulos.size() >= 10){
+            gameOver = true;
         }
-        while (true);
     }
     
-    public boolean mouseDown(Event e, int x, int y) {
-        for(Circulo circulo : circulos)
-            if(circulo.contains(x,y))
-                circulo.aumentar();
+    public boolean mouseDown(Event ev, int x, int y){
+        puntero = new Point(x, y);
+        for(int i = 0; i < circulos.size(); i++){
+            if(circulos.get(i).contains(puntero)){
+                circulos.get(i).aumentar(circulos);
+            }
+        }
         return true;
     }
 }
