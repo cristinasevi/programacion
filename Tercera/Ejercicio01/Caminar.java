@@ -14,13 +14,17 @@ public class Caminar extends Applet implements Runnable {
     Image imagen;
     Graphics noseve;
     
-    Image img1;
+    Image fotogramas[][];
+    String lugares[] = {"Guerrillero/g", "Hampon/h", "Vaquero/v"};
     
     public void init() {
         imagen = this.createImage(300, 300);
         noseve = imagen.getGraphics();
         
-        img1 = getImage(getCodeBase(), "Tercera/Ejercicio01/Sprites/Guerrillero/g1.gif"); // ruta y nombre con extensión del archivo
+        fotogramas = new Image[3][4];
+        for(int i=0; i<fotogramas.length; i++)
+            for(int j=0; j<fotogramas[i].length; j++)
+                fotogramas[i][j] = getImage(getCodeBase(), "Tercera/Ejercicio01/Sprites/" + lugares[i] + (j+1) + ".gif"); // ruta y nombre con extensión del archivo
             
         this.setSize(300, 300);
     }
@@ -38,13 +42,14 @@ public class Caminar extends Applet implements Runnable {
         noseve.setColor(Color.BLACK); 
         noseve.fillRect(0, 0, 300, 300);
         
-        noseve.drawImage(img1, 0, 0, 200, 250, this);
+        noseve.drawImage(fotogramas[1][2], 0, 0, 200, 250, this);
         
         g.drawImage(imagen, 0, 0, this);
     }
     
     public void run() {
         do {
+                       
             
             repaint();
             try {
