@@ -36,4 +36,9 @@ public class Pieza extends Rectangle {
         x = posx - (DIMENSION / 2);
         y = posy - (DIMENSION / 2);
     }
+    
+    public void ajustar(int posx, int posy) {
+        x = posx;
+        y = posy;
+    }
 }
