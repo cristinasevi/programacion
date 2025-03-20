@@ -12,7 +12,7 @@ import java.awt.Rectangle;
 
 public class BlackJack extends Applet {
     public static final int NUMCARTAS = 52;
-    public static final int CPF = 13;
+    public static final int CPP = 13;
     
     Image imagenes[];
     
@@ -28,7 +28,7 @@ public class BlackJack extends Applet {
         imagenes = new Image[NUMCARTAS];
         
         for(int i=0; i<NUMCARTAS; i++)
-            imagenes[i] = getImage(getCodeBase(), "Tercera/Ejercicio03/Cartas/" + ((i%CPF)+1) + palos[i/CPF]);
+            imagenes[i] = getImage(getCodeBase(), "Tercera/Ejercicio03/Cartas/" + ((i%CPP)+1) + palos[i/CPP]);
         
         this.setSize(700, 500);
     }
