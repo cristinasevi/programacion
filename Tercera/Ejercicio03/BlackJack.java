@@ -4,6 +4,7 @@
 package Tercera.Ejercicio03;
 
 import java.applet.Applet;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Event;
 import java.awt.Graphics;
@@ -15,6 +16,10 @@ public class BlackJack extends Applet {
     public static final int CPP = 13;
     
     Image imagenes[];
+    
+    Baraja baraja;
+    Mano croupier;
+    Mano mano;
     
     Image imagen;
     Graphics noseve;
@@ -30,6 +35,10 @@ public class BlackJack extends Applet {
         for(int i=0; i<NUMCARTAS; i++)
             imagenes[i] = getImage(getCodeBase(), "Tercera/Ejercicio03/Cartas/" + ((i%CPP)+1) + palos[i/CPP]);
         
+        baraja = new Baraja(imagenes);
+        croupier = new Mano(0);
+        mano = new Mano(400);
+        
         this.setSize(700, 500);
     }
 
@@ -41,6 +50,10 @@ public class BlackJack extends Applet {
         noseve.setColor(Color.BLACK); 
         noseve.fillRect(0, 0, 700, 500);
         noseve.drawImage(imagenes[0], 0, 0, 130, 200, this);
+       
+        croupier.paint(noseve, this);
+        mano.paint(noseve, this);
+        
         
         g.drawImage(imagen, 0, 0, this);
     }

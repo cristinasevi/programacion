@@ -20,6 +20,6 @@ public class Baraja {
     public Carta sacarCarta() {
         Carta carta = cartas.get(0);
         cartas.remove(0);
-        return cartas.get(0);
+        return carta;
     }
 }
