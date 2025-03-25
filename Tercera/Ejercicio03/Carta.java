@@ -8,7 +8,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 public class Carta {
-    public static final int ANCHURA = 100;
+    public static final int ANCHURA = 120;
     public static final int ALTURA = 200;
     private int posX, posY;
     Image imagen;
