@@ -4,11 +4,14 @@
 package Tercera.Ejercicio04;
 
 import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Event;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class Tablero extends Applet {
     public static final int TAM = 5;
@@ -16,6 +19,7 @@ public class Tablero extends Applet {
     Image imagenes[][];
     Lugar lugares[][];
     Point blanco;
+    AudioClip error, acierto, exito;
     
     Image imagen;
     Graphics noseve;
@@ -23,6 +27,12 @@ public class Tablero extends Applet {
     public void init() {
         imagen = this.createImage(700, 500);
         noseve = imagen.getGraphics();
+        
+        try {
+            error = getAudioClip(new URL(getCodeBase(), "Tercera/Ejercicio04/sonidos/error.wav"));
+            acierto = getAudioClip(new URL(getCodeBase(), "Tercera/Ejercicio04/sonidos/correct.wav"));
+            exito = getAudioClip(new URL(getCodeBase(), "Tercera/Ejercicio04/sonidos/exito.wav"));
+        } catch(MalformedURLException e) {};
         
         imagenes = new Image[TAM][TAM];
         lugares = new Lugar[TAM][TAM];
@@ -56,8 +66,29 @@ public class Tablero extends Applet {
         g.drawImage(imagen, 0, 0, this);
     }
     
+    public boolean mover(Point click) {
+        Point desplazamiento, hasta;
+        desplazamiento = new Point(delta(click.x, blanco.x), delta(click.y, blanco.y));
+        if((desplazamiento.x == 0) && (desplazamiento.y == 0))
+            return false;
+        if((desplazamiento.x != 0) && (desplazamiento.y != 0))
+            return false;
+        hasta = new Point(click.x + desplazamiento.x, click.y + desplazamiento.y);
+        return true;
+    }
+    
+    public int delta(int a, int b) {
+        if(a == b) return 0;
+        else return((b-a)/Math.abs(b-a));
+    }
+    
     public boolean mouseDown(Event e, int x, int y) {
         Point click;
+        click = new Point(x/Lugar.DIM, y/Lugar.DIM);
+        if(!mover(click))
+            error.play();
+        else
+            acierto.play();
         return true;
     }
     
