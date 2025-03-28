@@ -74,6 +74,13 @@ public class Tablero extends Applet {
         if((desplazamiento.x != 0) && (desplazamiento.y != 0))
             return false;
         hasta = new Point(click.x + desplazamiento.x, click.y + desplazamiento.y);
+        if(!((blanco.x == hasta.x) && (blanco.y == hasta.y)))
+            mover(hasta);
+        lugares[blanco.x][blanco.y].setImagen(lugares[click.x][click.y].getImagen());
+        lugares[blanco.x][blanco.y].valor = lugares[click.x][click.y].valor;
+        lugares[click.x][click.y].setImagen(null);
+        lugares[click.x][click.y].valor = 24;
+        blanco = click;
         return true;
     }
     
@@ -84,11 +91,13 @@ public class Tablero extends Applet {
     
     public boolean mouseDown(Event e, int x, int y) {
         Point click;
-        click = new Point(x/Lugar.DIM, y/Lugar.DIM);
+        click = new Point(y/Lugar.DIM, x/Lugar.DIM);
         if(!mover(click))
             error.play();
-        else
+        else {
             acierto.play();
+            repaint();
+        }
         return true;
     }
     
