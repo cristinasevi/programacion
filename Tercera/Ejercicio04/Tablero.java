@@ -5,6 +5,7 @@ package Tercera.Ejercicio04;
 
 import java.applet.Applet;
 import java.applet.AudioClip;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Event;
 import java.awt.Graphics;
@@ -12,6 +13,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Random;
 
 public class Tablero extends Applet {
     public static final int TAM = 5;
@@ -20,6 +22,7 @@ public class Tablero extends Applet {
     Lugar lugares[][];
     Point blanco;
     AudioClip error, acierto, exito;
+    Button botonMezclar;
     
     Image imagen;
     Graphics noseve;
@@ -45,6 +48,9 @@ public class Tablero extends Applet {
         }
         
         blanco = new Point(TAM-1, TAM-1); // hay que poner la posición en X e Y, inicialmente está en la 4, 4
+        
+        botonMezclar = new Button("Mezclar");
+        add(botonMezclar);
         
         this.setSize(700, 500);
     }
@@ -101,8 +107,38 @@ public class Tablero extends Applet {
         return true;
     }
     
-    public boolean action(Event e, Object obj) {
+    public void mezclar() {
+        Random random = new Random();
         
+        for (int i = 0; i < 100; i++) { 
+            Point[] posiblesMoves = new Point[4];
+            int numMoves = 0;
+            
+            if (blanco.x > 0) {
+                posiblesMoves[numMoves++] = new Point(blanco.x - 1, blanco.y);
+            }
+            if (blanco.x < TAM - 1) {
+                posiblesMoves[numMoves++] = new Point(blanco.x + 1, blanco.y);
+            }
+            if (blanco.y > 0) {
+                posiblesMoves[numMoves++] = new Point(blanco.x, blanco.y - 1);
+            }
+            if (blanco.y < TAM - 1) {
+                posiblesMoves[numMoves++] = new Point(blanco.x, blanco.y + 1);
+            }
+            if (numMoves > 0) {
+                Point move = posiblesMoves[random.nextInt(numMoves)];
+                mover(move);
+            }
+        }
+        repaint();
+    }
+    
+    public boolean action(Event e, Object obj) {
+        if (e.target == botonMezclar) {
+            mezclar();
+            return true;
+        }
         return true;
     }
 }
