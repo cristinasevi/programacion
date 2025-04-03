@@ -20,10 +20,12 @@ public class Casilla extends Rectangle {
     }
     
     public void paint(Graphics g) {
-        g.setColor(Color.BLACK);
+        g.setColor(color); // Color de fondo de la casilla
+        g.fillRect(x, y, width, height);
+        g.setColor(Color.BLACK); // Color del borde de la casilla
         g.drawRect(x, y, width, height);
         g.setFont(new Font("TimesRoman", Font.PLAIN, 24));
-        g.setColor(color);
-        g.drawString(""+valor, x+20, y+20);
+        g.setColor(Color.WHITE); // Color de la letra
+        g.drawString(""+valor, x+20, y+40);
     }
 }
