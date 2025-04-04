@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Event;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.ArrayList;
 
 public class Ruleta extends Applet {
     public static final int FILAS = 12;
@@ -19,7 +20,8 @@ public class Ruleta extends Applet {
     Graphics noseve;
     Casilla casillas[][];
     public int rojos[] = {1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
-    Ficha ficha;
+    ArrayList<Ficha> fichas[];
+    Ficha activa;
     Image imagenes[];
     
     public void init() {
@@ -42,7 +44,10 @@ public class Ruleta extends Applet {
         for(int i=0; i<NUMJUGADAS; i++)
             imagenes[i] = getImage(getCodeBase(), "Tercera/Ejercicio06/Fichas/ficha" + (i+1) + ".png");
                     
-        ficha = new Ficha(400, 400, 10, imagenes[2]);
+        fichas = new ArrayList[NUMJUGADAS];
+        int valores[] = {1, 5, 10, 25, 50, 100, 500, 1000, 5000, 10000};
+        for(int i=0; i<NUMJUGADAS; i++)
+            fichas[i] = new Ficha(400, 50+(i*Ficha.DIM), valores[i], imagenes[i]);
         
         this.setSize(700, 800);
     }
@@ -59,13 +64,29 @@ public class Ruleta extends Applet {
             for(int j=0; j<casillas[i].length; j++)
                 casillas[i][j].paint(noseve);
         
-        ficha.paint(noseve, this);
+        for(int i=0; i<NUMJUGADAS; i++)
+            fichas[i].paint(noseve, this);
         
         g.drawImage(imagen, 0, 0, this);
     }
     
     public boolean mouseDown(Event e, int x, int y) {
-        
+        for(int i=0; i<NUMJUGADAS; i++)
+            if(fichas[i].contains(x,y))
+                activa = fichas[i];
+        return true;
+    }
+    
+    public boolean mouseDrag(Event e, int x, int y) {
+        if(activa != null) {
+            activa.update(x, y);
+            repaint();
+        }
+        return true;
+    }
+    
+    public boolean mouseUp(Event e, int x, int y) {
+        activa = null;
         return true;
     }
     
