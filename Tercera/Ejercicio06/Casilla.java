@@ -10,8 +10,16 @@ import java.awt.Rectangle;
 
 public class Casilla extends Rectangle {
     public static final int DIM = 60;
-    int valor;
+    private int valor;
     Color color;
+    
+    public int getValor() {
+        return valor;
+    }
+
+    public void setValor(int valor) {
+        this.valor = valor;
+    }
 
     public Casilla(int posX, int posY, int valor, Color color) {
         super(posX, posY, DIM, DIM);
