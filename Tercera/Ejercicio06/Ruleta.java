@@ -31,15 +31,20 @@ public class Ruleta extends Applet {
     Button boton;
     int numeroSuerte;
     int jugadas[];
+    java.util.ArrayList<Integer> lRojos = new java.util.ArrayList<Integer>();
+    int dinero = 1000000;
+    int dineroApostado;
+    int dineroGanado;
     
     public void init() {
         imagen = this.createImage(700, 800);
         noseve = imagen.getGraphics();
         
+        jugadas = new int[NUMJUGADAS];
+        
         setup();
         
         casillas = new Casilla[FILAS][COLUMNAS];
-        java.util.ArrayList<Integer> lRojos = new java.util.ArrayList<Integer>();
         for(int i=0; i<rojos.length; i++)
             lRojos.add(new Integer(rojos[i]));
         
@@ -80,19 +85,58 @@ public class Ruleta extends Applet {
         noseve.setColor(Color.DARK_GRAY); 
         noseve.fillRect(0, 0, 700, 800);
         
-        for(int i=0; i<casillas.length; i++)
-            for(int j=0; j<casillas[i].length; j++)
-                casillas[i][j].paint(noseve);
+        mostrarCasillas();
+        mostrarFichas();
+        mostrarVector();
         
-        for(int i=0; i<NUMJUGADAS; i++)
-            for(Ficha ficha: fichas[i])
-                ficha.paint(noseve,this);
+        noseve.setColor(Color.WHITE);
+        noseve.drawString("En esta jugada estás apostando: " + dineroApostado, 270, 600);
+        noseve.drawString("En esta jugada has ganado: " + dineroGanado, 270, 650);
+        
+        noseve.drawString("Dinero: " + dinero, 270, 700);
         
         g.drawImage(imagen, 0, 0, this);
     }
+
+    public void mostrarFichas() {
+        for(int i=0; i<NUMJUGADAS; i++)
+            for(Ficha ficha : fichas[i])
+                ficha.paint(noseve,this);
+    }
+
+    public void mostrarCasillas() {
+        for(int i=0; i<casillas.length; i++)
+            for(int j=0; j<casillas[i].length; j++)
+                casillas[i][j].paint(noseve);
+    }
+
+    public void mostrarVector() {
+        Color color = Color.BLACK;
+        noseve.setColor(Color.BLUE);
+        noseve.drawString("" + numeroSuerte, 300, 80);
+        
+        for(int i=0; i<NUMJUGADAS; i++) {
+            color = (lRojos.contains(new Integer(jugadas[i]))) ? Color.RED : Color.BLACK;
+            noseve.setColor(color);    
+            noseve.drawString("" + jugadas[i], 500, (30*i)+80);
+        }
+        
+        if(color == Color.RED)
+            noseve.drawString("ROJO", 300, 120);
+        else
+            noseve.drawString("NEGRO", 300, 120);
+        if(numeroSuerte%2 == 0)
+            noseve.drawString("PAR", 300, 150);
+        else
+            noseve.drawString("PAR", 300, 150);
+        if(numeroSuerte<=18)
+            noseve.drawString("FALTA", 300, 180);
+        else
+            noseve.drawString("PASA", 300, 180);
+    }
     
     public boolean mouseDown(Event e, int x, int y) {
-        for(int i=0; i < NUMJUGADAS; i++) {
+        for(int i=0; i<NUMJUGADAS; i++) {
             for(Ficha ficha : fichas[i]) {
                 if(ficha.contains(x,y)){
                     activa = ficha;
@@ -113,14 +157,33 @@ public class Ruleta extends Applet {
     }
     
     public boolean mouseUp(Event e, int x, int y) {
-        activa.cargarApostados(casillas);
-        activa = null;
+        if(activa != null) {
+            activa.cargarApostados(casillas);
+            dineroApostado = 0;
+            for(int i=0; i<NUMJUGADAS; i++)
+                for(Ficha ficha : fichas[i])
+                    if(!ficha.getNumApostados().isEmpty())
+                        dineroApostado += ficha.getPrecio();
+            activa = null;
+            repaint();
+        }
         return true;
     }
     
     public boolean action(Event e, Object obj) {
         if(e.target instanceof Button) {
             this.numeroSuerte = (int)(Math.random()*37);
+            for(int i=0; i<NUMJUGADAS-1; i++)
+                jugadas[i] = jugadas[i+1];
+            jugadas[NUMJUGADAS-1] = numeroSuerte;
+            
+            dineroGanado = 0;
+            for(int i=0; i<NUMJUGADAS; i++)
+                for(Ficha ficha : fichas[i])
+                    if(ficha.getNumApostados().contains(new Integer(numeroSuerte)))
+                        dineroGanado += (ficha.getPrecio()*36) / ficha.getNumApostados().size();
+            dinero += (dineroGanado - dineroApostado);
+            repaint();
         }
         return true;
     }
