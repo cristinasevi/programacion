@@ -4,6 +4,7 @@
 package Tercera.Ejercicio07;
 
 import java.applet.Applet;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -19,19 +20,19 @@ public class Casilla extends Rectangle {
         super(posX, posY, DIM, DIM);
         this.imagen = img1;
         this.reverso = img2;
-        descubierta = true;
+        descubierta = false;
     }
 
     public Image getImagen() {
         return imagen;
     }
+    
+    public void setImagen(Image imagen) {
+        this.imagen = imagen;
+    }
 
     public boolean isDescubierta() {
         return descubierta;
-    }
-
-    public void setImagen(Image imagen) {
-        this.imagen = imagen;
     }
 
     public void setDescubierta(boolean descubierta) {
@@ -39,6 +40,8 @@ public class Casilla extends Rectangle {
     }
     
     public void paint(Graphics g, Applet app) {
+        g.setColor(Color.BLACK);
+        g.drawRect(x, y, width, height);
         if(descubierta) {
             g.drawImage(imagen, x, y, width, height, app);
         } else {
