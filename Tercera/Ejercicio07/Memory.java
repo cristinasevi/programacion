@@ -12,7 +12,7 @@ import java.awt.Image;
 
 public class Memory extends Applet implements Runnable {
     public static final int TAM = 4;
-    public static final int TIEMPO = 35;
+    public static final int TIEMPO = 1000;
     Image imagen;
     Graphics noseve;
     Image imagenes[];
@@ -20,6 +20,9 @@ public class Memory extends Applet implements Runnable {
     Casilla casillas[][];
     Casilla cuno = null;
     Casilla cdos = null;
+    int cuentaSegundos = 0;
+    int temporal = 0;
+    Thread animacion;
     
     public void init() {
         imagen = this.createImage(700, 800);
@@ -39,6 +42,11 @@ public class Memory extends Applet implements Runnable {
         desordenar();
         
         this.setSize(700, 800);
+    }
+    
+    public void start() {
+        animacion = new Thread(this);
+        animacion.start();
     }
 
     public void desordenar() {
@@ -87,22 +95,26 @@ public class Memory extends Applet implements Runnable {
                             if(cuno.getImagen() == cdos.getImagen()) {
                                 cuno = cdos = null;
                             } else {
-                                
+                                temporal = cuentaSegundos;
                             }
-                            break;
                     }
                     repaint();  
                 }
-                    return true;  
+                    
             }
         }
-        return false; 
+        return true;
     }
     
     public void run() {
         do {
-            
-            repaint();
+            cuentaSegundos++;
+            if((temporal != 0) && (cuentaSegundos - temporal) == 3) { // Si han pasado 3 segundos
+                cuno.setDescubierta(false);
+                cdos.setDescubierta(false);
+                cuno = cdos = null;
+                repaint();
+            }
             try {
                 Thread.sleep(TIEMPO);
             } catch(InterruptedException e) {}
