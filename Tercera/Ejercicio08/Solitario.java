@@ -18,7 +18,7 @@ public class Solitario extends Applet {
     Graphics noseve;
     Image imagenes[];
     Image reverso;
-    Carta cartas[][];
+    Baraja baraja;
     
     public void init() {
         imagen = this.createImage(700, 800);
