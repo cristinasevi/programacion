@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Event;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 
 public class Solitario extends Applet {
     public static final int NUMCARTAS = 52;
@@ -19,6 +20,10 @@ public class Solitario extends Applet {
     Image imagenes[];
     Image reverso;
     Baraja baraja;
+    MazoSecundario mazoSecundario;
+    Rectangle rectangulo;
+    Carta activa;
+    MazoPalo mazoPalos[];
     
     public void init() {
         imagen = this.createImage(700, 800);
@@ -30,7 +35,12 @@ public class Solitario extends Applet {
             imagenes[i] = getImage(getCodeBase(), "Tercera/Ejercicio08/Cartas/" + ((i%CPP)+1) + palos[i/CPP]);
         
         reverso = getImage(getCodeBase(), "Tercera/Ejercicio08/Cartas/reverso.png");
-        
+        rectangulo = new Rectangle(20, 20, Carta.ANCHURA, Carta.ALTURA); 
+        baraja = new Baraja(imagenes);
+        mazoSecundario = new MazoSecundario();
+        mazoPalos = new MazoPalo[NUM_PALOS];
+        for(int i=0; i<NUM_PALOS; i++)
+            mazoPalos[i] = new MazoPalo((i*(Carta.ANCHURA+30))+400);
         
         this.setSize(700, 800);
     }
@@ -42,12 +52,41 @@ public class Solitario extends Applet {
     public void paint(Graphics g) {
         noseve.setColor(Color.DARK_GRAY); 
         noseve.fillRect(0, 0, 700, 800);
-
+        noseve.drawImage(reverso, 20, 20, Carta.ANCHURA, Carta.ALTURA, this);
+        mazoSecundario.paint(noseve, this);
+        for(int i=0; i<NUM_PALOS; i++)
+            mazoPalos[i].paint(noseve, this);
+        
         g.drawImage(imagen, 0, 0, this);
     }
     
     public boolean mouseDown(Event e, int x, int y) {
-        
+        if(rectangulo.contains(x,y)) {
+            mazoSecundario.anadir(baraja.sacarCarta());
+            mazoSecundario.recolocar();
+        }
+        if(mazoSecundario.extraer().contains(x,y)) {
+            activa = mazoSecundario.extraer();
+        }
+            
+        repaint();
+        return true;
+    }
+    
+    public boolean mouseDrag(Event e, int x, int y) {
+        if(activa != null) {
+            activa.setPosicion(x - (Carta.ANCHURA/2), y - (Carta.ALTURA/2));
+            repaint();
+        }
+        return true;
+    }
+    
+    public boolean mouseUp(Event e, int x, int y) {
+        if(activa != null) {
+            mazoSecundario.recolocar();
+            activa = null;
+            repaint();
+        }
         return true;
     }
 }

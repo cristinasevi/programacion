@@ -18,6 +18,6 @@ public class Baraja {
     }
     
     public Carta sacarCarta() {
-        
+        return cartas.remove(0);
     }
 }

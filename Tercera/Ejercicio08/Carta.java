@@ -3,6 +3,7 @@
  */
 package Tercera.Ejercicio08;
 
+import java.applet.Applet;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -22,7 +23,7 @@ public class Carta extends Rectangle {
     private int palo;
     
     public Carta(Image imagen, int valor, int color, int palo) {
-        super(-200, -200, ALTURA, ANCHURA);
+        super(-200, -200, ANCHURA, ALTURA);
         this.imagen = imagen;
         this.valor = valor;
         this.color = color;
@@ -41,7 +42,12 @@ public class Carta extends Rectangle {
         return palo;
     }
     
-    public void paint(Graphics g) {
-        
+    public void paint(Graphics g, Applet app) {
+        g.drawImage(imagen, x, y, width, height, app);
+    }
+    
+    public void setPosicion(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 }
