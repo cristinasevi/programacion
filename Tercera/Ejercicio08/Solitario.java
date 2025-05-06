@@ -10,6 +10,7 @@ import java.awt.Event;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 public class Solitario extends Applet {
     public static final int NUMCARTAS = 52;
@@ -40,7 +41,7 @@ public class Solitario extends Applet {
         mazoSecundario = new MazoSecundario();
         mazoPalos = new MazoPalo[NUM_PALOS];
         for(int i=0; i<NUM_PALOS; i++)
-            mazoPalos[i] = new MazoPalo((i*(Carta.ANCHURA+30))+400);
+            mazoPalos[i] = new MazoPalo((i*(Carta.ANCHURA+30))+300);
         
         this.setSize(700, 800);
     }
@@ -53,22 +54,26 @@ public class Solitario extends Applet {
         noseve.setColor(Color.DARK_GRAY); 
         noseve.fillRect(0, 0, 700, 800);
         noseve.drawImage(reverso, 20, 20, Carta.ANCHURA, Carta.ALTURA, this);
-        mazoSecundario.paint(noseve, this);
         for(int i=0; i<NUM_PALOS; i++)
             mazoPalos[i].paint(noseve, this);
+        mazoSecundario.paint(noseve, this);
         
         g.drawImage(imagen, 0, 0, this);
     }
     
     public boolean mouseDown(Event e, int x, int y) {
         if(rectangulo.contains(x,y)) {
-            mazoSecundario.anadir(baraja.sacarCarta());
-            mazoSecundario.recolocar();
+            if(!baraja.getCartas().isEmpty()) {
+                mazoSecundario.anadir(baraja.sacarCarta());
+                mazoSecundario.recolocar();
+            } else {
+                baraja.setCartas(mazoSecundario.getCartas());
+                mazoSecundario.setCartas(new ArrayList<Carta>());
+            }
         }
         if(mazoSecundario.extraer().contains(x,y)) {
             activa = mazoSecundario.extraer();
         }
-            
         repaint();
         return true;
     }
@@ -83,6 +88,12 @@ public class Solitario extends Applet {
     
     public boolean mouseUp(Event e, int x, int y) {
         if(activa != null) {
+            for(int i=0; i<NUM_PALOS; i++)
+                if(activa.intersects(mazoPalos[i]))
+                    if(mazoPalos[i].anadir(activa)) {
+                        mazoSecundario.eliminar();
+                        break;
+                    }
             mazoSecundario.recolocar();
             activa = null;
             repaint();

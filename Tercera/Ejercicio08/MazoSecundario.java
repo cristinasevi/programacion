@@ -10,10 +10,18 @@ import java.awt.Graphics;
 public class MazoSecundario {
     public static final int POSICIONX = 110;
     public static final int POSICIONY = 20;
-    ArrayList<Carta> cartas;
+    private ArrayList<Carta> cartas;
     
     public MazoSecundario() {
         cartas = new ArrayList<Carta>();
+    }
+
+    public ArrayList<Carta> getCartas() {
+        return cartas;
+    }
+
+    public void setCartas(ArrayList<Carta> cartas) {
+        this.cartas = cartas;
     }
     
     public void anadir(Carta c) {

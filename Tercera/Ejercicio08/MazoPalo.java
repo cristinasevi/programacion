@@ -26,12 +26,23 @@ public class MazoPalo extends Rectangle {
             carta.paint(g, app);
     }
     
-    public boolean anadir(Carta c) {
-        
-        return true;
+    public boolean anadir(Carta carta) {
+        if(cartas.isEmpty() && carta.getValor()==1) {
+            cartas.add(carta);
+            palo = carta.getPalo();
+            recolocar();
+            return true;
+        } else {
+            if(palo == carta.getPalo() && (carta.getValor()-1 == cartas.get(cartas.size()-1).getValor())) {
+                cartas.add(carta);
+                recolocar();
+                return true;
+            }
+        }
+        return false;
     }
     
     public void recolocar() {
-        
+        cartas.get(cartas.size()-1).setPosicion(x, POSICIONY);
     }
 }

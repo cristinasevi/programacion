@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Baraja {
-    ArrayList<Carta> cartas;
+    private ArrayList<Carta> cartas;
     
     public Baraja(Image imagenes[]) {
         cartas = new ArrayList<Carta>();
@@ -19,5 +19,13 @@ public class Baraja {
     
     public Carta sacarCarta() {
         return cartas.remove(0);
+    }
+
+    public ArrayList<Carta> getCartas() {
+        return cartas;
+    }
+
+    public void setCartas(ArrayList<Carta> cartas) {
+        this.cartas = cartas;
     }
 }
