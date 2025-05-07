@@ -16,6 +16,7 @@ public class Solitario extends Applet {
     public static final int NUMCARTAS = 52;
     public static final int CPP = 13; // Cartas Por Palo
     public static final int NUM_PALOS = 4;
+    public static final int NUM_COLUMNAS = 7;
     Image imagen;
     Graphics noseve;
     Image imagenes[];
@@ -25,6 +26,7 @@ public class Solitario extends Applet {
     Rectangle rectangulo;
     Carta activa;
     MazoPalo mazoPalos[];
+    MazoJuego mazoJuegos[];
     
     public void init() {
         imagen = this.createImage(700, 800);
@@ -39,9 +41,14 @@ public class Solitario extends Applet {
         rectangulo = new Rectangle(20, 20, Carta.ANCHURA, Carta.ALTURA); 
         baraja = new Baraja(imagenes);
         mazoSecundario = new MazoSecundario();
+        
         mazoPalos = new MazoPalo[NUM_PALOS];
         for(int i=0; i<NUM_PALOS; i++)
             mazoPalos[i] = new MazoPalo((i*(Carta.ANCHURA+30))+300);
+        
+        mazoJuegos = new MazoJuego[NUM_COLUMNAS];
+        for(int i=0; i<NUM_COLUMNAS; i++)
+            mazoJuegos[i] = new MazoJuego(i*(Carta.ANCHURA+20)+20);
         
         this.setSize(700, 800);
     }
@@ -54,8 +61,13 @@ public class Solitario extends Applet {
         noseve.setColor(Color.DARK_GRAY); 
         noseve.fillRect(0, 0, 700, 800);
         noseve.drawImage(reverso, 20, 20, Carta.ANCHURA, Carta.ALTURA, this);
+        
         for(int i=0; i<NUM_PALOS; i++)
             mazoPalos[i].paint(noseve, this);
+        
+        for(int i=0; i<NUM_COLUMNAS; i++)
+            mazoJuegos[i].paint(noseve, this);
+        
         mazoSecundario.paint(noseve, this);
         
         g.drawImage(imagen, 0, 0, this);
@@ -94,6 +106,9 @@ public class Solitario extends Applet {
                         mazoSecundario.eliminar();
                         break;
                     }
+            for(int i=0; i<NUM_COLUMNAS; i++)
+                if(mazoJuegos[i].getCartas().isEmpty())
+                    
             mazoSecundario.recolocar();
             activa = null;
             repaint();

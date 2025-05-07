@@ -44,8 +44,4 @@ public class MazoSecundario {
     public void recolocar() {
         cartas.get(cartas.size()-1).setPosicion(POSICIONX, POSICIONY);
     }
-    
-    public void sacar() {
-        
-    }
 }
