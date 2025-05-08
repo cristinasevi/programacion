@@ -107,8 +107,19 @@ public class Solitario extends Applet {
                         break;
                     }
             for(int i=0; i<NUM_COLUMNAS; i++)
-                if(mazoJuegos[i].getCartas().isEmpty())
+                if(mazoJuegos[i].getCartas().isEmpty()) {
+                    if(activa.intersects(mazoJuegos[i])) {
+                        mazoJuegos[i].anadir(activa);
+                        mazoSecundario.eliminar();
+                        break;
+                    }
+                } else if(activa.intersects(mazoJuegos[i].extraer())){
+                    if(mazoJuegos[i].anadir(activa)) {
+                        mazoSecundario.eliminar();
+                        break;
+                    }
                     
+                }
             mazoSecundario.recolocar();
             activa = null;
             repaint();
