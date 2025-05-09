@@ -81,6 +81,7 @@ public class Solitario extends Applet {
             } else {
                 baraja.setCartas(mazoSecundario.getCartas());
                 mazoSecundario.setCartas(new ArrayList<Carta>());
+                mazoSecundario.anadir(baraja.sacarCarta());
             }
         }
         if(mazoSecundario.extraer().contains(x,y)) {
