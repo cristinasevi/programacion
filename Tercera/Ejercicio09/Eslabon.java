@@ -37,17 +37,17 @@ public class Eslabon extends Rectangle {
     
     public void update() {
         switch(direccion) {
-            case IZQUIERDA:
-                x -= TAM;
-                break;
-            case DERECHA:
-                x += TAM;
-                break;
             case ARRIBA:
                 y -= TAM;
                 break;
             case ABAJO:
                 y += TAM;
+                break;
+            case IZQUIERDA:
+                x -= TAM;
+                break;
+            case DERECHA:
+                x += TAM;
                 break;
         }
     }
