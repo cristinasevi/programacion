@@ -4,16 +4,13 @@
 package Tercera.Ejercicio09;
 
 import java.applet.Applet;
+import java.awt.Event;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 
 public class Eslabon extends Rectangle {
     public static final int TAM = 15;
-    public static final int IZQUIERDA = 0;
-    public static final int DERECHA = 1;
-    public static final int ARRIBA = 2;
-    public static final int ABAJO = 3;
     private int direccion;
     Image imagen;
     
@@ -37,16 +34,16 @@ public class Eslabon extends Rectangle {
     
     public void update() {
         switch(direccion) {
-            case ARRIBA:
+            case Event.UP:
                 y -= TAM;
                 break;
-            case ABAJO:
+            case Event.DOWN:
                 y += TAM;
                 break;
-            case IZQUIERDA:
+            case Event.LEFT:
                 x -= TAM;
                 break;
-            case DERECHA:
+            case Event.RIGHT:
                 x += TAM;
                 break;
         }
