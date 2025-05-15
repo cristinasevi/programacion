@@ -10,6 +10,7 @@ import java.awt.Rectangle;
 
 public class Coche extends Rectangle {
     Image imagen;
+    boolean luz;
     
     public Coche() {
         super();

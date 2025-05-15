@@ -7,26 +7,23 @@ import java.applet.Applet;
 import java.awt.Graphics;
 import java.awt.Image;
 
-public class Fondo extends Applet {
+public class Fondo {
     Image imagen;
-    Graphics noseve;
+    int posX;
+    Applet applet;
     
-    public void init() {
-        imagen = this.createImage(700, 800);
-        noseve = imagen.getGraphics();
-        
-        imagen = getImage(getCodeBase(), "Tercera/Ejercicio10/imgsCoche/fondo.png");
-
-        this.setSize(700, 800);
-    }
-    
-    public void update(Graphics g) {
-        paint(g);
+    public Fondo(Image imagen, Applet applet) {
+        this.imagen = imagen;
+        this.applet = applet;
     }
     
     public void paint(Graphics g) {
-        noseve.fillRect(0, 0, 700, 800);
-        
-        g.drawImage(imagen, 0, 0, this);
+        g.drawImage(imagen, posX, 0, applet.getWidth(), applet.getHeight(), applet); // Imagen 1
+        g.drawImage(imagen, posX + applet.getWidth(), 0, applet.getWidth(), applet.getHeight(), applet); // Imagen 2
+    }
+    
+    public void update() {
+        posX -= 5;
+        if(posX <= -applet.getWidth()) posX = 0; // Con esto tenemos el infinito
     }
 }
