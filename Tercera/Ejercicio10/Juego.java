@@ -4,6 +4,7 @@
 package Tercera.Ejercicio10;
 
 import java.applet.Applet;
+import java.awt.Event;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -14,15 +15,15 @@ public class Juego extends Applet implements Runnable {
     Image imagen;
     Graphics noseve;
     
-    int velocidad = 100;
+    public static int velocidad = 100; // No es constante (final) porque va a ir variando
     Image imgFondo;
     Fondo fondo;
     Image imgRuedas[];
     Rueda ruedas[];
-    Image imgAcelerador;
-    Pedal acelerador;
-    Image imgFreno;
-    Pedal freno;
+    Image imgCoche, imgLuz;
+    Coche coche;
+    Image imgPed1, imgPed2;
+    Pedal pedal1, pedal2;
     
     public void init() {
         imagen = this.createImage(500, 350);
@@ -41,11 +42,15 @@ public class Juego extends Applet implements Runnable {
             ruedas[i] = new Rueda(imgRuedas, 65 + (i*123), 302);
         }
         
-        imgAcelerador = getImage(getCodeBase(), "Tercera/Ejercicio10/imgsCoche/pedal1.png");
-        acelerador = new Pedal(imgAcelerador, 300, 250);
+        imgPed1 = getImage(getCodeBase(), "Tercera/Ejercicio10/imgsCoche/pedal1.png");
+        pedal1 = new Pedal(imgPed1, 300, 280, 20, 40);
         
-        imgFreno = getImage(getCodeBase(), "Tercera/Ejercicio10/imgsCoche/pedal2.png");
-        freno = new Pedal(imgAcelerador, 370, 250);
+        imgPed2 = getImage(getCodeBase(), "Tercera/Ejercicio10/imgsCoche/pedal2.png");
+        pedal2 = new Pedal(imgPed2, 350, 280, 20, 40);
+        
+        imgCoche = getImage(getCodeBase(), "Tercera/Ejercicio10/imgsCoche/mercedes.png");
+        imgLuz = getImage(getCodeBase(), "Tercera/Ejercicio10/imgsCoche/lightBeam.png");
+        coche = new Coche(imgCoche, imgLuz);
         
         this.setSize(500, 350);
     }
@@ -62,12 +67,14 @@ public class Juego extends Applet implements Runnable {
     public void paint(Graphics g) {
         fondo.paint(noseve);
         
+        coche.paint(noseve, this);
+        
         for(int i=0; i<NUMRUEDAS; i++) 
             ruedas[i].paint(noseve, this);
         
-        acelerador.paint(noseve, this);
-        freno.paint(noseve, this);
-        
+        pedal1.paint(noseve, this);
+        pedal2.paint(noseve, this);
+
         g.drawImage(imagen, 0, 0, this);
     }
     
@@ -83,5 +90,17 @@ public class Juego extends Applet implements Runnable {
             } catch (InterruptedException e) {}
         }
         while (true);
+    }
+    
+    public boolean mouseDown(Event e, int x, int y) {
+        if(coche.contains(x,y)) {
+            coche.turn();
+        }
+        if(pedal1.contains(x, y))
+            pedal1.acelerar();
+        if(pedal2.contains(x, y))
+            pedal2.acelerar();
+        
+        return true;
     }
 }

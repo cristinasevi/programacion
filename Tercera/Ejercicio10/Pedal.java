@@ -6,22 +6,25 @@ package Tercera.Ejercicio10;
 import java.applet.Applet;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 
-public class Pedal {
+public class Pedal extends Rectangle {
     Image imagen;
-    int posX, posY;
     
-    public Pedal(Image imagen, int posX, int posY) {
+    public Pedal(Image imagen, int x, int y, int width, int height) {
+        super(x, y, width, height);
         this.imagen = imagen;
-        this.posX = posX;
-        this.posY = posY;
     }
     
     public void paint(Graphics g, Applet app) {
-        g.drawImage(imagen, posX, posY, 50, 70, app);
+        g.drawImage(imagen, x, y, width, height, app);
     }
     
-    public void update() {
-        
+    public void acelerar() {
+        if(Juego.velocidad > 10) Juego.velocidad -= 10;
+    }
+    
+    public void frenar() {
+        Juego.velocidad += 10;
     }
 }
